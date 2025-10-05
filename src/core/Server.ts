@@ -28,6 +28,31 @@ export class Server {
 
         const { SERVER_HOST, SERVER_PORT } = this.config;
 
+        return new Promise( ( resolve, reject ) => {
+
+            const server = this.app.listen( SERVER_PORT, SERVER_HOST, ( err?: Error ) => {
+
+                if ( err ) reject( err );
+                else {
+
+                    if ( this.debug ) {
+
+                        console.log( `Server running on port ${SERVER_PORT}` );
+                        console.log( `Host: ${SERVER_HOST}` );
+                        console.log( `Environment: ${this.env}` );
+
+                    }
+
+                    resolve();
+
+                }
+
+            } );
+
+            process.on( 'SIGTERM', () => server.close() );
+
+        } );
+
     }
 
 }
