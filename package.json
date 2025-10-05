@@ -1,0 +1,25 @@
+{
+  "name": "pseinfo-app",
+  "private": true,
+  "description": "Open source periodic table, adless and free forever",
+  "license": "MIT",
+  "version": "3.0.0",
+  "author": {
+    "name": "komed3 (Paul Köhler)",
+    "email": "webmaster@komed3.de",
+    "url": "https://komed3.de"
+  },
+  "homepage": "https://github.com/pseinfo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pseinfo/app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pseinfo/app/issues"
+  },
+  "keywords": [
+    "periodic-table", "nuclides", "open-source"
+  ],
+  "type": "module",
+  "main": "dist/app.js"
+}
