@@ -1,4 +1,4 @@
-import { Server } from '@core/Server';
+import { Server } from './core/Server';
 
 ( async () : Promise< void > => {
 

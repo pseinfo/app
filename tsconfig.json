@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "baseUrl": ".",
-    "paths": {
-      "@core/*": [ "src/core/*" ]
-    }
+    "baseUrl": "."
   }
 }
