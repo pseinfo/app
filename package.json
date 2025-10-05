@@ -18,8 +18,19 @@
     "url": "https://github.com/pseinfo/app/issues"
   },
   "keywords": [
-    "periodic-table", "nuclides", "open-source"
+    "periodic-table",
+    "nuclides",
+    "open-source"
   ],
   "type": "module",
-  "main": "dist/app.js"
+  "main": "dist/app.js",
+  "dependencies": {
+    "express": "^5.1.0",
+    "i18next": "^25.5.3",
+    "pug": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "typescript": "^5.9.3"
+  }
 }
