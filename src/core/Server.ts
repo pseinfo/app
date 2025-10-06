@@ -28,8 +28,8 @@ export class Server {
 
     private async configureMiddleware () : Promise< void > {
 
-        this._app.use( compression( this._config.cfg.compressionOptions ) );
-        this._app.use( rateLimit( this._config.cfg.rateLimit ) );
+        this._app.use( compression( this._config.cfg.compression ?? {} ) );
+        this._app.use( rateLimit( this._config.cfg.rateLimit ?? {} ) );
 
         await configureI18n( this._config.cfg );
         this._app.use( i18nMiddleware );

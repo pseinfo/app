@@ -8,8 +8,6 @@ export interface ServerConfig {
         secure: boolean;
         debug: boolean;
     };
-    compressionOptions: CompressionOptions;
-    rateLimit: Partial< RateLimitOptions >;
     i18n: {
         languages: string[];
         fallbackLng: string;
@@ -19,4 +17,6 @@ export interface ServerConfig {
         missing: string;
         preload?: string[];
     };
+    compression?: CompressionOptions;
+    rateLimit?: Partial< RateLimitOptions >;
 }
