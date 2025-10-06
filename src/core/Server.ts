@@ -2,11 +2,14 @@ import { ConfigLoader } from '@pseinfo/app/core/ConfigLoader';
 import { Router } from '@pseinfo/app/core/Router';
 import { configureI18n, i18nMiddleware } from '@pseinfo/app/middleware/i18n';
 import { Server as HttpServer } from 'node:http';
+import { join } from 'node:path';
 import compression from 'compression';
-import express, { Application } from 'express';
+import express, { static as serveStatic, Application } from 'express';
 import { rateLimit } from 'express-rate-limit';
 
 export class Server {
+
+    public readonly cwd: string = process.cwd();
 
     private _config: ConfigLoader;
     private _router: Router;
@@ -43,6 +46,14 @@ export class Server {
 
     }
 
+    private serveStatics () : void {
+
+        this.app.use( `/assets`, serveStatic( join( this.cwd, 'public/assets' ) ) );
+        this.app.use( `/js`, serveStatic( join( this.cwd, 'public/js' ) ) );
+        this.app.use( `/css`, serveStatic( join( this.cwd, 'public/css' ) ) );
+
+    }
+
     private initEventHandlers () : void {
 
         process.on( 'SIGTERM', this.stop.bind( this ) );
@@ -54,6 +65,7 @@ export class Server {
         await this._config.loadConfig();
         await this.configureMiddleware();
         this.configureViews();
+        this.serveStatics();
         this.initEventHandlers();
 
     }
