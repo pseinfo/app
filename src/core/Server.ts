@@ -1,5 +1,6 @@
 import { ConfigLoader } from '@pseinfo/app/core/ConfigLoader';
 import { Router } from '@pseinfo/app/core/Router';
+import { configureI18n, i18nMiddleware } from '@pseinfo/app/middleware/i18n';
 import { Server as HttpServer } from 'node:http';
 import express, { Application } from 'express';
 
@@ -23,6 +24,13 @@ export class Server {
 
     }
 
+    private async configureMiddleware () : Promise< void > {
+
+        await configureI18n( this._config.cfg );
+        this._app.use( i18nMiddleware );
+
+    }
+
     private configureViews () : void {
 
         this.app.set( 'view engine', 'pug');
@@ -33,7 +41,7 @@ export class Server {
     public async init () : Promise< void > {
 
         await this._config.loadConfig();
-
+        await this.configureMiddleware();
         this.configureViews();
 
     }
