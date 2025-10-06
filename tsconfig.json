@@ -1,6 +1,12 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@pseinfo/app/controller/*": [ "src/controller/*" ],
+      "@pseinfo/app/core/*": [ "src/core/*" ],
+      "@pseinfo/app/types": [ "src/types" ],
+      "@pseinfo/app/utils/*": [ "src/utils/*" ]
+    }
   }
 }
