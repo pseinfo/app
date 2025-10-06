@@ -1,2 +1,15 @@
 server:
   port: 3000
+
+i18n:
+  languages: [ en-US, de-DE ]
+  fallbackLng: en-US
+  namespaces: [ generic ]
+  fallbackNS: generic
+  pattern: "{{lng}}/{{ns}}.json"
+  missing: "{{lng}}/{{ns}}.missing.json"
+  preload: [ en-US ]
+
+rateLimit:
+  windowMs: 900000
+  limit: 1000

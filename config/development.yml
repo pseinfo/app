@@ -1,2 +1,4 @@
 server:
   host: http://localhost
+  secure: false
+  debug: true
