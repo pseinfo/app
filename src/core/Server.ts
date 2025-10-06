@@ -2,7 +2,9 @@ import { ConfigLoader } from '@pseinfo/app/core/ConfigLoader';
 import { Router } from '@pseinfo/app/core/Router';
 import { configureI18n, i18nMiddleware } from '@pseinfo/app/middleware/i18n';
 import { Server as HttpServer } from 'node:http';
+import compression from 'compression';
 import express, { Application } from 'express';
+import { rateLimit } from 'express-rate-limit';
 
 export class Server {
 
@@ -25,6 +27,9 @@ export class Server {
     }
 
     private async configureMiddleware () : Promise< void > {
+
+        this._app.use( compression( this._config.cfg.compressionOptions ) );
+        this._app.use( rateLimit( this._config.cfg.rateLimit ) );
 
         await configureI18n( this._config.cfg );
         this._app.use( i18nMiddleware );

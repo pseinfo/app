@@ -1,3 +1,6 @@
+import { CompressionOptions } from 'compression';
+import { Options as RateLimitOptions } from 'express-rate-limit';
+
 export interface ServerConfig {
     server: {
         host: string;
@@ -5,6 +8,8 @@ export interface ServerConfig {
         secure: boolean;
         debug: boolean;
     };
+    compressionOptions: CompressionOptions;
+    rateLimit: Partial< RateLimitOptions >;
     i18n: {
         languages: string[];
         fallbackLng: string;
