@@ -23,9 +23,18 @@ export class Server {
 
     }
 
+    private configureViews () : void {
+
+        this.app.set( 'view engine', 'pug');
+        this.app.set( 'views', 'views' );
+
+    }
+
     public async init () : Promise< void > {
 
         await this._config.loadConfig();
+
+        this.configureViews();
 
     }
 
