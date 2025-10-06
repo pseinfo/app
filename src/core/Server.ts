@@ -9,8 +9,6 @@ import { rateLimit } from 'express-rate-limit';
 
 export class Server {
 
-    public readonly cwd: string = process.cwd();
-
     private _config: ConfigLoader;
     private _router: Router;
     private _app: Application;
@@ -48,9 +46,11 @@ export class Server {
 
     private serveStatics () : void {
 
-        this.app.use( `/assets`, serveStatic( join( this.cwd, 'public/assets' ) ) );
-        this.app.use( `/js`, serveStatic( join( this.cwd, 'public/js' ) ) );
-        this.app.use( `/css`, serveStatic( join( this.cwd, 'public/css' ) ) );
+        const cwd = process.cwd();
+
+        this.app.use( `/assets`, serveStatic( join( cwd, 'public/assets' ) ) );
+        this.app.use( `/js`, serveStatic( join( cwd, 'public/js' ) ) );
+        this.app.use( `/css`, serveStatic( join( cwd, 'public/css' ) ) );
 
     }
 
