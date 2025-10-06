@@ -12,6 +12,10 @@ export class ConfigLoader {
     private _config: ServerConfig;
     private _isLoaded: boolean = false;
 
+    public get env () : string { return this._env }
+    public get cfg () : ServerConfig { this.assertLoaded(); return this._config }
+    public get isLoaded () : boolean { return this._isLoaded }
+
     constructor ( env?: string, configDir?: string, encoding?: BufferEncoding ) {
 
         this._configDir = configDir || join( process.cwd(), 'config' );
@@ -76,12 +80,6 @@ export class ConfigLoader {
         await this.loadConfig();
 
     }
-
-    public get env () : string { return this._env }
-
-    public get cfg () : ServerConfig { this.assertLoaded(); return this._config }
-
-    public get isLoaded () : boolean { return this._isLoaded }
 
     public getConfigValue< T = any > ( keyPath: string, defaultValue?: T ) : T {
 

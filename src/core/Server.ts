@@ -10,6 +10,11 @@ export class Server {
     private _app: Application;
     private _server?: HttpServer;
 
+    public get cfg () : ConfigLoader { return this._config }
+    public get router () : Router { return this._router }
+    public get app () : Application { return this._app }
+    public get server () : HttpServer | undefined { return this._server }
+
     constructor () {
 
         this._config = new ConfigLoader();
@@ -17,14 +22,6 @@ export class Server {
         this._app = express();
 
     }
-
-    public get cfg () : ConfigLoader { return this._config }
-
-    public get router () : Router { return this._router }
-
-    public get app () : Application { return this._app }
-
-    public get server () : HttpServer { return this._server }
 
     public async init () : Promise< void > {
 
