@@ -1,6 +1,7 @@
 import { ServerConfig } from '@pseinfo/app/types';
 import { access, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import deepmerge from 'deepmerge';
 import { load } from 'js-yaml';
 
 export class ConfigLoader {
@@ -17,15 +18,6 @@ export class ConfigLoader {
         this._encoding = encoding || 'utf8';
         this._env = env || process.env.NODE_ENV || 'production';
         this._config = {} as ServerConfig;
-
-    }
-
-    public get env () : string { return this._env }
-
-    public get cfg () : ServerConfig {
-
-        if ( ! this._isLoaded ) throw new Error( 'Configuration not loaded. Call loadConfig() first.' );
-        return this._config;
 
     }
 
@@ -55,6 +47,33 @@ export class ConfigLoader {
             throw new Error( `Error loading ${filename}: ${ err instanceof Error ? err.message : 'Unknown error' }` );
 
         }
+
+    }
+
+    public async loadConfig () : Promise< void > {
+
+        try {
+
+            const defConfig = await this.loadConfigFile( 'default.yml' );
+            const envConfig = await this.loadConfigFile( `${this._env}.yml`, true );
+
+            this._config = deepmerge( defConfig, envConfig );
+            this._isLoaded = true;
+
+        } catch ( err ) {
+
+            throw new Error( `Failed to load configuration: ${ err instanceof Error ? err.message : 'Unknown error' }` );
+
+        }
+
+    }
+
+    public get env () : string { return this._env }
+
+    public get cfg () : ServerConfig {
+
+        if ( ! this._isLoaded ) throw new Error( 'Configuration not loaded. Call loadConfig() first.' );
+        return this._config;
 
     }
 
