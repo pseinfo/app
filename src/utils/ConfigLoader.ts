@@ -21,6 +21,8 @@ export class ConfigLoader {
 
     }
 
+    private assertLoaded () : void { if ( ! this._isLoaded ) throw new Error( 'Configuration not loaded. Call loadConfig() first.' ) }
+
     private async loadConfigFile ( filename: string, optional: boolean = false ) : Promise< ServerConfig > {
 
         const filePath = join( this._configDir, filename );
@@ -68,12 +70,34 @@ export class ConfigLoader {
 
     }
 
+    public async reloadConfig () : Promise< void > {
+
+        this._isLoaded = false;
+        await this.loadConfig();
+
+    }
+
     public get env () : string { return this._env }
 
-    public get cfg () : ServerConfig {
+    public get cfg () : ServerConfig { this.assertLoaded(); return this._config }
 
-        if ( ! this._isLoaded ) throw new Error( 'Configuration not loaded. Call loadConfig() first.' );
-        return this._config;
+    public get isLoaded () : boolean { return this._isLoaded }
+
+    public getConfigValue< T = any > ( keyPath: string, defaultValue?: T ) : T {
+
+        this.assertLoaded();
+
+        const keys = keyPath.split( '.' );
+        let current: any = this._config;
+
+        for ( const key of keys ) {
+
+            if ( current && typeof current === 'object' && key in current ) current = current[ key ];
+            else return defaultValue as T;
+
+        }
+
+        return current as T;
 
     }
 
