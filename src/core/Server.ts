@@ -1,29 +1,56 @@
 import { ConfigLoader } from '@pseinfo/app/core/ConfigLoader';
 import { Router } from '@pseinfo/app/core/Router';
+import { Server as HttpServer } from 'node:http';
 import express, { Application } from 'express';
 
 export class Server {
 
-    private config: ConfigLoader;
-    private router: Router;
-    private expressApp: Application;
+    private _config: ConfigLoader;
+    private _router: Router;
+    private _app: Application;
+    private _server?: HttpServer;
 
     constructor () {
 
-        this.config = new ConfigLoader();
-        this.router = new Router();
-        this.expressApp = express();
+        this._config = new ConfigLoader();
+        this._router = new Router();
+        this._app = express();
 
     }
+
+    public get cfg () : ConfigLoader { return this._config }
+
+    public get router () : Router { return this._router }
+
+    public get app () : Application { return this._app }
+
+    public get server () : HttpServer { return this._server }
 
     public async init () : Promise< void > {
 
-        await this.config.loadConfig();
+        await this._config.loadConfig();
 
     }
 
-    public start () : void {}
+    public start () : Promise< void > {
 
-    public stop () : void {}
+        const { port, host } = this._config.cfg.server;
+
+        return new Promise( ( resolve, reject ) => {
+
+            this._server = this.app.listen( port, host, ( err?: Error ) => {
+
+                if ( err ) reject( err );
+                else resolve();
+
+            } );
+
+            process.on( 'SIGTERM', this.stop.bind( this ) );
+
+        } );
+
+    }
+
+    public stop () : void { this._server?.close() }
 
 }
