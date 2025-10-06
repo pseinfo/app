@@ -43,11 +43,18 @@ export class Server {
 
     }
 
+    private initEventHandlers () : void {
+
+        process.on( 'SIGTERM', this.stop.bind( this ) );
+
+    }
+
     public async init () : Promise< void > {
 
         await this._config.loadConfig();
         await this.configureMiddleware();
         this.configureViews();
+        this.initEventHandlers();
 
     }
 
@@ -63,8 +70,6 @@ export class Server {
                 else resolve();
 
             } );
-
-            process.on( 'SIGTERM', this.stop.bind( this ) );
 
         } );
 
