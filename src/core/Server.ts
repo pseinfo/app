@@ -3,6 +3,7 @@ import { Router } from '@pseinfo/app/core/Router';
 import { configureI18n, i18nMiddleware } from '@pseinfo/app/middleware/i18n';
 import { Server as HttpServer } from 'node:http';
 import { join } from 'node:path';
+import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import express, { static as serveStatic, Application } from 'express';
 import { rateLimit } from 'express-rate-limit';
@@ -29,6 +30,7 @@ export class Server {
 
     private async configureMiddleware () : Promise< void > {
 
+        this._app.use( cookieParser() );
         this._app.use( compression( this._config.cfg.compression ?? {} ) );
         this._app.use( rateLimit( this._config.cfg.rateLimit ?? {} ) );
 
@@ -46,11 +48,17 @@ export class Server {
 
     private serveStatics () : void {
 
+        const { options, paths } = this._config.cfg.static;
         const cwd = process.cwd();
 
-        this.app.use( `/assets`, serveStatic( join( cwd, 'public/assets' ) ) );
-        this.app.use( `/js`, serveStatic( join( cwd, 'public/js' ) ) );
-        this.app.use( `/css`, serveStatic( join( cwd, 'public/css' ) ) );
+        for ( const [ key, path ] of Object.entries( paths ) ) {
+
+            try { this.app.use( `/${ key }`, serveStatic( join( cwd, path ), options ) ) }
+            catch ( err ) { throw new Error( `Cannot serve statics from ${ key }: ${
+                err instanceof Error ? err.message : 'Unknown error'
+            }` ) }
+
+        }
 
     }
 

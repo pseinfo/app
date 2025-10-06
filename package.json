@@ -25,6 +25,7 @@
   "main": "dist/index.js",
   "dependencies": {
     "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
     "deepmerge": "^4.3.1",
     "express": "^5.1.0",
     "express-rate-limit": "^8.1.0",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@types/compression": "^1.8.1",
+    "@types/cookie-parser": "^1.4.9",
     "@types/express": "^5.0.3",
     "@types/js-yaml": "^4.0.9",
     "typescript": "^5.9.3"
