@@ -7,6 +7,8 @@ export abstract class PageController extends BaseController {
 
     constructor ( options: ControllerOptions ) { super( options ) }
 
+    private canonicalURL ( req: Request ) : string { return `${ req.protocol }://${ req.get( 'host' ) }${ req.originalUrl }` }
+
     private globalContext ( server: Server, req: Request ) : GlobalContext {
 
         return {
@@ -17,6 +19,10 @@ export abstract class PageController extends BaseController {
                 path: req.path,
                 query: req.query,
                 params: req.params
+            },
+            meta: {
+                canonical: this.canonicalURL( req ),
+                robots: 'index, follow'
             }
         };
 
@@ -44,11 +50,19 @@ export abstract class PageController extends BaseController {
 
     public handle ( server: Server, req: Request, res: Response ) : void {
 
-        res.render( this.template, {
-            ...this.globalContext( server, req ),
-            ...this.cookieContext( server, req, res ),
-            data: this.data
-        } );
+        try {
+
+            res.status( 200 ).render( this.template, {
+                ...this.globalContext( server, req ),
+                ...this.cookieContext( server, req, res ),
+                data: this.data
+            } );
+
+        } catch ( err ) {
+
+            res.status( 500 ).render( 'base/error', { err } );
+
+        }
 
     }
 

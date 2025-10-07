@@ -57,4 +57,8 @@ export interface GlobalContext {
         query: Request[ 'query' ];
         params: Request[ 'params' ];
     };
+    meta: {
+        canonical: string;
+        robots: string;
+    };
 }
