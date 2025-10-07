@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
+    "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "sourceMap": true,
     "baseUrl": ".",
+    "outDir": "./dist",
     "paths": {
       "@pseinfo/app/controller/*": [ "src/controller/*" ],
       "@pseinfo/app/core/*": [ "src/core/*" ],
