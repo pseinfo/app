@@ -9,6 +9,8 @@ export abstract class PageController extends BaseController {
 
     protected canonicalURL ( req: Request ) : string { return `${ req.protocol }://${ req.get( 'host' ) }${ req.originalUrl }` }
 
+    protected bodyClasses () : string { return `pt pt-page pt-${this.template} ${ ( this.meta.classes ?? [] ).join( ' ' ) }` }
+
     protected globalContext ( server: Server, req: Request ) : GlobalContext {
 
         return {
@@ -55,6 +57,7 @@ export abstract class PageController extends BaseController {
             res.status( 200 ).render( this.template, {
                 ...this.globalContext( server, req ),
                 cookies: this.cookieContext( server, req, res ),
+                bodyClasses: this.bodyClasses(),
                 data: this.data
             } );
 

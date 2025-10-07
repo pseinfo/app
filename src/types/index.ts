@@ -34,6 +34,7 @@ export interface PageData {
     title?: string;
     description?: string;
     keywords?: string[];
+    classes?: string[];
 }
 
 export interface ControllerOptions {
