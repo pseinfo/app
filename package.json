@@ -23,6 +23,10 @@
     "open-source"
   ],
   "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc && tsc-alias",
+    "start": "cross-env NODE_ENV=development node dist/index.js"
+  },
   "dependencies": {
     "compression": "^1.8.1",
     "cookie-parser": "^1.4.7",
@@ -40,6 +44,8 @@
     "@types/cookie-parser": "^1.4.9",
     "@types/express": "^5.0.3",
     "@types/js-yaml": "^4.0.9",
+    "cross-env": "^10.1.0",
+    "tsc-alias": "^1.8.16",
     "typescript": "^5.9.3"
   }
 }
