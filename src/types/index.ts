@@ -31,10 +31,9 @@ export interface ServerConfig {
 }
 
 export interface PageData {
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
     keywords?: string[];
-    canonical?: string;
 }
 
 export interface ControllerOptions {
