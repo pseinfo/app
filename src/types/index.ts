@@ -3,6 +3,8 @@ import { Request } from 'express';
 import { Options as RateLimitOptions } from 'express-rate-limit';
 import { ServeStaticOptions } from 'serve-static';
 
+export type CookieContext = Record< string, string >;
+
 export interface ServerConfig {
     server: {
         host: string;
@@ -23,6 +25,7 @@ export interface ServerConfig {
         missing: string;
         preload?: string[];
     };
+    cookies?: CookieContext;
     compression?: CompressionOptions;
     rateLimit?: Partial< RateLimitOptions >;
 }

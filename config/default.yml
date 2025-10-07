@@ -19,3 +19,7 @@ i18n:
 rateLimit:
   windowMs: 900000
   limit: 1000
+
+cookies:
+  locale: en-US
+  theme: light
