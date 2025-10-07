@@ -7,9 +7,9 @@ export abstract class PageController extends BaseController {
 
     constructor ( options: ControllerOptions ) { super( options ) }
 
-    private canonicalURL ( req: Request ) : string { return `${ req.protocol }://${ req.get( 'host' ) }${ req.originalUrl }` }
+    protected canonicalURL ( req: Request ) : string { return `${ req.protocol }://${ req.get( 'host' ) }${ req.originalUrl }` }
 
-    private globalContext ( server: Server, req: Request ) : GlobalContext {
+    protected globalContext ( server: Server, req: Request ) : GlobalContext {
 
         return {
             i18n: req.t.bind( req ),
@@ -28,7 +28,7 @@ export abstract class PageController extends BaseController {
 
     }
 
-    private cookieContext ( server: Server, req: Request, res: Response ) : CookieContext {
+    protected cookieContext ( server: Server, req: Request, res: Response ) : CookieContext {
 
         const cookies: CookieContext = {};
         const cookieOpts: CookieOptions = {
