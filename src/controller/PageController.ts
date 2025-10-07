@@ -54,7 +54,7 @@ export abstract class PageController extends BaseController {
 
             res.status( 200 ).render( this.template, {
                 ...this.globalContext( server, req ),
-                ...this.cookieContext( server, req, res ),
+                cookies: this.cookieContext( server, req, res ),
                 data: this.data
             } );
 
