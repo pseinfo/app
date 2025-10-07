@@ -12,8 +12,8 @@ i18n:
   fallbackLng: en-US
   namespaces: [ generic ]
   fallbackNS: generic
-  pattern: "{{lng}}/{{ns}}.json"
-  missing: "{{lng}}/{{ns}}.missing.json"
+  pattern: "locales/{{lng}}/{{ns}}.json"
+  missing: "locales/{{lng}}/{{ns}}.missing.json"
   preload: [ en-US ]
 
 rateLimit:
