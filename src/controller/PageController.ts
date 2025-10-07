@@ -9,7 +9,9 @@ export abstract class PageController extends BaseController {
 
     public handle ( server: Server, req: Request, res: Response, next: NextFunction ) : void {
 
-        res.render( this.template, {} );
+        res.render( this.template, {
+            data: this.data
+        } );
 
     }
 

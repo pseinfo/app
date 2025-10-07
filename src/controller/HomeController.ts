@@ -6,11 +6,7 @@ export class HomeController extends PageController {
 
         super( {
             route: '{/}',
-            template: 'home',
-            meta: {
-                title: '',
-                description: ''
-            }
+            template: 'home'
         } );
 
     }

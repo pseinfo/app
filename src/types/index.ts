@@ -36,7 +36,7 @@ export interface PageData {
 export interface ControllerOptions {
     route: string;
     template: string;
-    meta: PageData;
+    meta?: PageData;
     assets?: {
         js?: string[];
         css?: string[];
