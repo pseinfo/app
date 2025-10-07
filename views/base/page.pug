@@ -8,3 +8,9 @@ html( lang= cookies.locale, theme= cookies.theme, units= cookies.units )
     link( rel= "icon", href= "assets/atom.svg", sizes= "any", type= "image/svg+xml" )
 
   body#top( class= bodyClasses )
+    include ../components/header.pug
+
+    main#main.pt-main( role="main", aria-label= "Content" )
+      block main
+
+    include ../components/footer.pug
