@@ -1,3 +1,4 @@
+import { controller } from '@pseinfo/app/controller/index';
 import { ConfigLoader } from '@pseinfo/app/core/ConfigLoader';
 import { Router } from '@pseinfo/app/core/Router';
 import { configureI18n, i18nMiddleware } from '@pseinfo/app/middleware/i18n';
@@ -23,7 +24,7 @@ export class Server {
     constructor () {
 
         this._config = new ConfigLoader();
-        this._router = new Router();
+        this._router = new Router( this );
         this._app = express();
 
     }
@@ -62,6 +63,13 @@ export class Server {
 
     }
 
+    private configureRoutes () : void {
+
+        this._router.registerControllers( controller );
+        this._app.use( '/', this._router.router );
+
+    }
+
     private initEventHandlers () : void {
 
         process.on( 'SIGTERM', this.stop.bind( this ) );
@@ -74,6 +82,7 @@ export class Server {
         await this.configureMiddleware();
         this.configureViews();
         this.serveStatics();
+        this.configureRoutes();
         this.initEventHandlers();
 
     }

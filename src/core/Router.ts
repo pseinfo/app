@@ -1,4 +1,5 @@
 import { BaseController } from '@pseinfo/app/controller/BaseController';
+import { Server } from '@pseinfo/app/core/Server';
 import { Router as ExpressRouter } from 'express';
 
 export class Router {
@@ -7,17 +8,9 @@ export class Router {
 
     public get router () : ExpressRouter { return this._router }
 
-    constructor () { this._router = ExpressRouter() }
+    constructor ( private server: Server ) { this._router = ExpressRouter() }
 
-    public registerController ( controller: BaseController ) : void {
-
-        const route = controller.getRoute();
-        const handler = controller.handle.bind( controller );
-
-        this.router.get( route, handler );
-        this.router.post( route, handler );
-
-    }
+    public registerController ( controller: BaseController ) : void {}
 
     public registerControllers ( controllers: BaseController[] ) : void {
 
