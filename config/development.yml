@@ -1,4 +1,4 @@
 server:
-  host: http://localhost
+  host: localhost
   secure: false
   debug: true
