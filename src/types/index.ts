@@ -1,4 +1,5 @@
 import { CompressionOptions } from 'compression';
+import { Request } from 'express';
 import { Options as RateLimitOptions } from 'express-rate-limit';
 import { ServeStaticOptions } from 'serve-static';
 
@@ -42,4 +43,15 @@ export interface ControllerOptions {
         css?: string[];
     };
     data?: Record< string, any >;
+}
+
+export interface GlobalContext {
+    i18n: any;
+    server: ServerConfig[ 'server' ];
+    site: {
+        originalUrl: string;
+        path: string;
+        query: Request[ 'query' ];
+        params: Request[ 'params' ];
+    };
 }
