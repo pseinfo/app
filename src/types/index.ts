@@ -25,3 +25,21 @@ export interface ServerConfig {
     compression?: CompressionOptions;
     rateLimit?: Partial< RateLimitOptions >;
 }
+
+export interface PageData {
+    title: string;
+    description: string;
+    keywords?: string[];
+    canonical?: string;
+}
+
+export interface ControllerOptions {
+    route: string;
+    template: string;
+    meta: PageData;
+    assets?: {
+        js?: string[];
+        css?: string[];
+    };
+    data?: Record< string, any >;
+}

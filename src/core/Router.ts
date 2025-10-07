@@ -14,7 +14,7 @@ export class Router {
 
     public registerControllers ( controllers: BaseController[] ) : void {
 
-        for ( const controller in controllers ) this.registerController( controller );
+        for ( const controller of controllers ) this.registerController( controller );
 
     }
 
