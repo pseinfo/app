@@ -18,6 +18,6 @@ export class Debugger {
 
     public err ( msg: string, err?: any ) : void { this.logMsg( 'error', msg + ( err instanceof Error ) ? `: ${ err.message }` : ``, true ) }
 
-    public exit ( msg: string, err?: any ) : void { this.err( msg, err ), process.exit( 1 ) }
+    public exit ( msg: string, err?: any ) : never { this.err( msg, err ), process.exit( 1 ) }
 
 }

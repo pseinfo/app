@@ -12,21 +12,21 @@ import { rateLimit } from 'express-rate-limit';
 
 export class Server {
 
-    private _config: ConfigLoader;
     private _debugger: Debugger;
+    private _config: ConfigLoader;
     private _router: Router;
     private _app: Application;
     private _server?: HttpServer;
 
-    public get cfg () : ConfigLoader { return this._config }
     public get debug () : Debugger { return this._debugger }
+    public get cfg () : ConfigLoader { return this._config }
     public get router () : Router { return this._router }
     public get app () : Application { return this._app }
     public get server () : HttpServer | undefined { return this._server }
 
     constructor () {
 
-        this._config = new ConfigLoader();
+        this._config = new ConfigLoader( this );
         this._debugger = new Debugger( this._config.cfg.server.debug );
         this._router = new Router( this );
         this._app = express();
