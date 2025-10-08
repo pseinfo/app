@@ -104,4 +104,36 @@ export class ConfigurationService implements IConfig {
         return this._isLoaded;
     }
 
+    public getValue< T = any >( keyPath: string, defaultValue?: T ) : T {
+
+        this.assertLoaded();
+
+        if ( this._cache.has( keyPath ) ) {
+            return this._cache.get( keyPath );
+        }
+
+        const keys = keyPath.split( '.' );
+        let current: any = this._config;
+
+        for ( const key of keys ) {
+
+            if ( current && typeof current === 'object' && key in current ) {
+
+                current = current[ key ];
+
+            } else {
+
+                const result = defaultValue as T;
+                this._cache.set( keyPath, result );
+                return result;
+
+            }
+
+        }
+
+        this._cache.set( keyPath, current );
+        return current as T;
+
+    }
+
 }
