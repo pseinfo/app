@@ -2,6 +2,7 @@ export class Debugger {
 
     constructor ( private debug: boolean = false ) {}
 
+    public set enabled ( enable: boolean ) { this.debug = enable }
     public get enabled () : boolean { return this.debug }
 
     private logMsg ( type: 'log' | 'warn' | 'error', msg: string, critical?: boolean ) : void {

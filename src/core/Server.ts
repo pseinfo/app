@@ -27,7 +27,7 @@ export class Server {
     constructor () {
 
         this._config = new ConfigLoader();
-        this._debugger = new Debugger( this._config.cfg.server.debug );
+        this._debugger = new Debugger();
         this._router = new Router( this );
         this._app = express();
 
@@ -81,6 +81,8 @@ export class Server {
     public async init () : Promise< void > {
 
         await this._config.loadConfig();
+        this._debugger.enabled = this._config.cfg.server.debug;
+
         await this.configureMiddleware();
         this.configureViews();
         this.serveStatics();
