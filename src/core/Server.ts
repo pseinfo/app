@@ -19,6 +19,7 @@ export class Server {
     private _server?: HttpServer;
 
     public get cfg () : ConfigLoader { return this._config }
+    public get debug () : Debugger { return this._debugger }
     public get router () : Router { return this._router }
     public get app () : Application { return this._app }
     public get server () : HttpServer | undefined { return this._server }
