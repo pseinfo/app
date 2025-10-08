@@ -31,6 +31,36 @@ export class ConfigurationService implements IConfig {
 
     }
 
+    private async loadConfigFile ( filename: string, optional: boolean = false ) : Promise< Partial< ServerConfig > > {
+
+        const filePath = join( this._configDir, filename );
+
+        try {
+
+            await access( filePath );
+
+            const fileContent = await readFile( filePath, { encoding: this._encoding } );
+            const parsedConfig = load( fileContent ) as any;
+
+            if ( ! parsedConfig || typeof parsedConfig !== 'object' ) {
+                this.logger.fatal( `Invalid configuration format in ${filename}` );
+            }
+
+            return parsedConfig as Partial< ServerConfig >;
+
+        } catch ( error ) {
+
+            if ( error instanceof Error && 'code' in error && error.code === 'ENOENT' ) {
+                if ( optional ) return {};
+                else this.logger.fatal( `Required configuration file not found: ${filePath}`, error );
+            }
+
+            this.logger.fatal( `Error loading ${filename}`, error );
+
+        }
+
+    }
+
     public getENV () : string {
         return this._env;
     }
