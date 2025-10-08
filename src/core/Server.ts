@@ -2,6 +2,7 @@ import { controller } from '@pseinfo/app/controller/index';
 import { ConfigLoader } from '@pseinfo/app/core/ConfigLoader';
 import { Router } from '@pseinfo/app/core/Router';
 import { configureI18n, i18nMiddleware } from '@pseinfo/app/middleware/i18n';
+import { Debugger } from '@pseinfo/app/utils/Debugger';
 import { Server as HttpServer } from 'node:http';
 import { join } from 'node:path';
 import cookieParser from 'cookie-parser';
@@ -12,6 +13,7 @@ import { rateLimit } from 'express-rate-limit';
 export class Server {
 
     private _config: ConfigLoader;
+    private _debugger: Debugger;
     private _router: Router;
     private _app: Application;
     private _server?: HttpServer;
@@ -24,6 +26,7 @@ export class Server {
     constructor () {
 
         this._config = new ConfigLoader();
+        this._debugger = new Debugger( this._config.cfg.server.debug );
         this._router = new Router( this );
         this._app = express();
 
@@ -55,9 +58,7 @@ export class Server {
         for ( const [ key, path ] of Object.entries( paths ) ) {
 
             try { this.app.use( `/${ key }`, serveStatic( join( cwd, path ), options ) ) }
-            catch ( err ) { throw new Error( `Cannot serve statics from ${ key }: ${
-                err instanceof Error ? err.message : 'Unknown error'
-            }` ) }
+            catch ( err ) { this._debugger.exit( `Cannot serve statics from ${ key }`, err ) }
 
         }
 
@@ -89,14 +90,22 @@ export class Server {
 
     public start () : Promise< void > {
 
-        const { port, host } = this._config.cfg.server;
+        const { port, host, secure } = this._config.cfg.server;
 
         return new Promise( ( resolve, reject ) => {
 
             this._server = this.app.listen( port, host, ( err?: Error ) => {
 
                 if ( err ) reject( err );
-                else resolve();
+                else {
+
+                    this._debugger.log( `Server is running on port: ${ port }`, true );
+                    this._debugger.log( `Serving host: ${ host }` );
+                    this._debugger.log( `HTTPS enabled: ${ secure ? 'yes' : 'no' }` );
+                    this._debugger.log( `Debugger enabled: ${ this._debugger.enabled ? 'yes' : 'no' }` );
+                    resolve();
+
+                }
 
             } );
 
@@ -104,6 +113,11 @@ export class Server {
 
     }
 
-    public stop () : void { this._server?.close() }
+    public stop () : void {
+
+        this._debugger.warn( `Server is shutting down`, true );
+        this._server?.close();
+
+    }
 
 }

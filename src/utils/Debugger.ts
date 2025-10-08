@@ -4,29 +4,20 @@ export class Debugger {
 
     public get enabled () : boolean { return this.debug }
 
-    private logMsg ( type: 'log' | 'warn' | 'error', module: string, msg: string, critical?: boolean ) : void {
+    private logMsg ( type: 'log' | 'warn' | 'error', msg: string, critical?: boolean ) : void {
 
         if ( critical || type === 'error' || this.debug ) console[ type ](
-            `${ new Date().toISOString() } [${ type.toUpperCase() }] ${ module }: ${ msg }`
+            `${ new Date().toISOString() } [${ type.toUpperCase() }] ${ msg }`
         );
 
     }
 
-    public log ( module: string, msg: string, critical?: boolean ) : void { this.logMsg( 'log', module, msg, critical ) }
+    public log ( msg: string, critical?: boolean ) : void { this.logMsg( 'log', msg, critical ) }
 
-    public warn ( module: string, msg: string, critical?: boolean ) : void { this.logMsg( 'warn', module, msg, critical ) }
+    public warn ( msg: string, critical?: boolean ) : void { this.logMsg( 'warn', msg, critical ) }
 
-    public err ( module: string, msg: string, err?: any ) : void {
+    public err ( msg: string, err?: any ) : void { this.logMsg( 'error', msg + ( err instanceof Error ) ? `: ${ err.message }` : ``, true ) }
 
-        this.logMsg( 'error', module, msg + ( err instanceof Error ) ? `: ${ err.message }` : ``, true );
-
-    }
-
-    public exit ( module: string, msg: string, err?: any ) : void {
-
-        this.err( module, msg, err );
-        process.exit( 1 );
-
-    }
+    public exit ( msg: string, err?: any ) : void { this.err( msg, err ), process.exit( 1 ) }
 
 }
