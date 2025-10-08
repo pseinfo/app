@@ -31,7 +31,7 @@ export class ConfigurationService implements IConfig {
 
     }
 
-    private async loadConfigFile ( filename: string, optional: boolean = false ) : Promise< Partial< ServerConfig > > {
+    private async loadConfigFile ( filename: string, optional: boolean = false ) : Promise< Partial< ServerConfig > | undefined > {
 
         const filePath = join( this._configDir, filename );
 
@@ -58,6 +58,34 @@ export class ConfigurationService implements IConfig {
             this.logger.fatal( `Error loading ${filename}`, error );
 
         }
+
+    }
+
+    public async loadConfiguration () : Promise< void > {
+
+        try {
+
+            const defaultConfig = await this.loadConfigFile( 'default.yml' );
+            const envConfig = await this.loadConfigFile( `${this._env}.yml`, true );
+
+            this._config = deepmerge( defaultConfig ?? {}, envConfig ?? {} );
+            this._isLoaded = true;
+            this._cache.clear();
+
+        } catch ( error ) {
+
+            this.logger.fatal( `Failed to load configuration`, error );
+
+        }
+
+    }
+
+    public async reloadConfiguration () : Promise< void > {
+
+        this._isLoaded = false;
+        this._cache.clear();
+
+        await this.loadConfiguration();
 
     }
 
