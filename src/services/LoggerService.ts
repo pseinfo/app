@@ -63,4 +63,19 @@ export class LoggerService implements ILogger {
 
     }
 
+    public fatal ( message: string, error?: Error | any, ...args: never[] ) : never {
+
+        this.error( message, error, ...args );
+        process.exit( 1 );
+
+    }
+
+    public setEnabled ( enabled: boolean ) : void {
+        this._enabled = enabled;
+    }
+
+    public isEnabled () : boolean {
+        return this._enabled;
+    }
+
 }
