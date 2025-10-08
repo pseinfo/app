@@ -7,14 +7,14 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "declaration": true,
+    "declaration": false,
     "declarationMap": false,
     "sourceMap": true,
     "baseUrl": ".",
     "rootDir": "./src",
     "outDir": "./dist",
     "paths": {
-      "@pseinfo/app/interfaces/*": [ "src/interfaces/*" ],
+      "@pseinfo/app/services/*": [ "src/services/*" ],
       "@pseinfo/app/types/*": [ "src/types/*" ],
       "@pseinfo/app/utils/*": [ "src/utils/*" ]
     }
