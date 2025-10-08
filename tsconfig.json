@@ -14,6 +14,7 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "paths": {
+      "@pseinfo/app/interfaces/*": [ "src/interfaces/*" ],
       "@pseinfo/app/types": [ "src/types/index" ],
       "@pseinfo/app/utils/*": [ "src/utils/*" ]
     }
