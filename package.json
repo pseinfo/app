@@ -22,37 +22,7 @@
     "nuclides",
     "open-source"
   ],
-  "main": "dist/index.js",
-  "scripts": {
-    "assets:clear": "rm -rf public/css && rm -rf public/js",
-    "assets:css": "npx sass ui/css:public/css --style=compressed --no-source-map",
-    "assets:js": "uglifyjs-folder ui/src/ -o public/js/ --each",
-    "assets": "npm run assets:clear && npm run assets:css && npm run assets:js",
-    "build": "npm run tsc && npm run assets",
-    "start": "cross-env NODE_ENV=development node dist/index.js",
-    "tsc": "tsc && tsc-alias"
-  },
-  "dependencies": {
-    "compression": "^1.8.1",
-    "cookie-parser": "^1.4.7",
-    "deepmerge": "^4.3.1",
-    "express": "^5.1.0",
-    "express-rate-limit": "^8.1.0",
-    "i18next": "^25.5.3",
-    "i18next-fs-backend": "^2.6.0",
-    "i18next-http-middleware": "^3.8.1",
-    "js-yaml": "^4.1.0",
-    "pug": "^3.0.3"
-  },
-  "devDependencies": {
-    "@types/compression": "^1.8.1",
-    "@types/cookie-parser": "^1.4.9",
-    "@types/express": "^5.0.3",
-    "@types/js-yaml": "^4.0.9",
-    "cross-env": "^10.1.0",
-    "sass": "^1.93.2",
-    "tsc-alias": "^1.8.16",
-    "typescript": "^5.9.3",
-    "uglifyjs-folder": "^3.3.0"
-  }
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
 }

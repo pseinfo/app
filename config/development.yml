@@ -1,4 +1,0 @@
-server:
-  host: localhost
-  secure: false
-  debug: true

@@ -13,13 +13,7 @@
     "baseUrl": ".",
     "rootDir": "./src",
     "outDir": "./dist",
-    "paths": {
-      "@pseinfo/app/controller/*": [ "src/controller/*" ],
-      "@pseinfo/app/core/*": [ "src/core/*" ],
-      "@pseinfo/app/middleware/*": [ "src/middleware/*" ],
-      "@pseinfo/app/types": [ "src/types" ],
-      "@pseinfo/app/utils/*": [ "src/utils/*" ]
-    }
+    "paths": {}
   },
   "tsc-alias": {
     "resolveFullPaths": true
