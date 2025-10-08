@@ -23,4 +23,27 @@ export class ConfigurationService implements IConfig {
 
     }
 
+    private assertLoaded () : void {
+
+        if ( ! this._isLoaded ) {
+            this.logger.fatal( `Configuration not loaded. Call loadConfiguration() first.` );
+        }
+
+    }
+
+    public getENV () : string {
+        return this._env;
+    }
+
+    public getConfiguration () : ServerConfig {
+
+        this.assertLoaded();
+        return this._config;
+
+    }
+
+    public isConfigurationLoaded () : boolean {
+        return this._isLoaded;
+    }
+
 }
