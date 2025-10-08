@@ -1,6 +1,7 @@
 import { CompressionOptions } from 'compression';
 import { Request } from 'express';
 import { Options as RateLimitOptions } from 'express-rate-limit';
+import { $Dictionary } from 'i18next/typescript/helpers';
 import { ServeStaticOptions } from 'serve-static';
 
 export type CookieContext = Record< string, string >;
@@ -34,7 +35,6 @@ export interface PageData {
     title?: string;
     description?: string;
     keywords?: string[];
-    classes?: string[];
 }
 
 export interface ControllerOptions {
@@ -45,7 +45,9 @@ export interface ControllerOptions {
         js?: string[];
         css?: string[];
     };
+    classes?: string[];
     data?: Record< string, any >;
+    dict?: $Dictionary;
 }
 
 export interface GlobalContext {

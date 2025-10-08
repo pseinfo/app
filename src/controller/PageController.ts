@@ -1,6 +1,6 @@
 import { BaseController } from '@pseinfo/app/controller/BaseController';
 import { Server } from '@pseinfo/app/core/Server';
-import { ControllerOptions, CookieContext, GlobalContext } from '@pseinfo/app/types';
+import { ControllerOptions, CookieContext, GlobalContext, PageData } from '@pseinfo/app/types';
 import { CookieOptions, Request, Response } from 'express';
 
 export abstract class PageController extends BaseController {
@@ -9,7 +9,7 @@ export abstract class PageController extends BaseController {
 
     protected canonicalURL ( req: Request ) : string { return `${ req.protocol }://${ req.get( 'host' ) }${ req.originalUrl }` }
 
-    protected bodyClasses () : string { return `pt pt-page pt-${this.template} ${ ( this.meta.classes ?? [] ).join( ' ' ) }`.trim() }
+    protected bodyClasses () : string { return `pt pt-page pt-${this.template} ${ ( this.options.classes ?? [] ).join( ' ' ) }`.trim() }
 
     protected globalContext ( server: Server, req: Request ) : GlobalContext {
 
@@ -50,15 +50,29 @@ export abstract class PageController extends BaseController {
 
     }
 
+    protected pageData ( req: Request ) : Required< PageData > {
+
+        return { ...{
+            title: req.t( `${this.template}:title`, this.dict ),
+            description: req.t( `${this.template}:description`, this.dict ),
+            keywords: []
+        }, ...this.meta };
+
+    }
+
     public handle ( server: Server, req: Request, res: Response ) : void {
 
         try {
 
+            const globalContext = this.globalContext( server, req );
+            const cookieContext = this.cookieContext( server, req, res );
+            const pageData = this.pageData( req );
+
             res.status( 200 ).render( this.template, {
-                ...this.globalContext( server, req ),
-                cookies: this.cookieContext( server, req, res ),
+                ...globalContext, cookies: cookieContext,
                 bodyClasses: this.bodyClasses(),
-                data: this.data
+                meta: { ...globalContext.meta, ...pageData },
+                data: this.data, dict: this.dict
             } );
 
         } catch ( err ) {
