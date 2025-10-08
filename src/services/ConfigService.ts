@@ -136,4 +136,28 @@ export class ConfigurationService implements IConfig {
 
     }
 
+    public getServerConfig () : ServerConfig[ 'server' ] {
+        return this._config.server;
+    }
+
+    public getStaticConfig () : ServerConfig[ 'static' ] {
+        return this._config.static;
+    }
+
+    public getI18nConfig () : ServerConfig[ 'i18n' ] {
+        return this._config.i18n;
+    }
+
+    public getCompressionConfig () : ServerConfig[ 'compression' ] {
+        return this._config.compression;
+    }
+
+    public getRateLimitConfig () : ServerConfig[ 'rateLimit' ] {
+        return this._config.rateLimit;
+    }
+
+    public getCookiesConfig () : ServerConfig[ 'cookies' ] {
+        return this._config.cookies || {};
+    }
+
 }
