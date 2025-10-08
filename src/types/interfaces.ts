@@ -6,6 +6,12 @@ export interface IConfig {
     getConfiguration () : ServerConfig;
     isConfigurationLoaded () : boolean;
     getValue< T = any >( keyPath: string, defaultValue?: T ) : T;
+    getServerConfig () : ServerConfig[ 'server' ];
+    getStaticConfig () : ServerConfig[ 'static' ];
+    getI18nConfig () : ServerConfig[ 'i18n' ];
+    getCompressionConfig () : ServerConfig[ 'compression' ];
+    getRateLimitConfig () : ServerConfig[ 'rateLimit' ];
+    getCookiesConfig () : ServerConfig[ 'cookies' ];
 }
 
 export interface ILogger {
