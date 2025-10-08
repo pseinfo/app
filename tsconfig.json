@@ -13,7 +13,10 @@
     "baseUrl": ".",
     "rootDir": "./src",
     "outDir": "./dist",
-    "paths": {}
+    "paths": {
+      "@pseinfo/app/types": [ "src/types/index" ],
+      "@pseinfo/app/utils/*": [ "src/utils/*" ]
+    }
   },
   "tsc-alias": {
     "resolveFullPaths": true
