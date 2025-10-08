@@ -1,4 +1,3 @@
-import { Server } from '@pseinfo/app/core/Server';
 import { ServerConfig } from '@pseinfo/app/types';
 import { access, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -17,7 +16,7 @@ export class ConfigLoader {
     public get cfg () : ServerConfig { this.assertLoaded(); return this._config }
     public get isLoaded () : boolean { return this._isLoaded }
 
-    constructor ( private server: Server, env?: string, configDir?: string, encoding?: BufferEncoding ) {
+    constructor ( env?: string, configDir?: string, encoding?: BufferEncoding ) {
 
         this._configDir = configDir || join( process.cwd(), 'config' );
         this._encoding = encoding || 'utf8';
@@ -26,9 +25,9 @@ export class ConfigLoader {
 
     }
 
-    private assertLoaded () : void { if ( ! this._isLoaded ) this.server.debug.exit( `Configuration not loaded. Call loadConfig() first.` ) }
+    private assertLoaded () : void { if ( ! this._isLoaded ) throw new Error( 'Configuration not loaded. Call loadConfig() first.' ) }
 
-    private async loadConfigFile ( filename: string, optional: boolean = false ) : Promise< ServerConfig | undefined > {
+    private async loadConfigFile ( filename: string, optional: boolean = false ) : Promise< ServerConfig > {
 
         const filePath = join( this._configDir, filename );
 
@@ -39,7 +38,7 @@ export class ConfigLoader {
             const fileContent = await readFile( filePath, { encoding: this._encoding } );
             const parsedConfig = load( fileContent ) as ServerConfig;
 
-            if ( ! parsedConfig || typeof parsedConfig !== 'object' ) this.server.debug.exit( `Invalid configuration format in ${filename}` );
+            if ( ! parsedConfig || typeof parsedConfig !== 'object' ) throw new Error( `Invalid configuration format in ${filename}` );
             return parsedConfig;
 
         } catch ( err ) {
@@ -47,11 +46,11 @@ export class ConfigLoader {
             if ( err instanceof Error && 'code' in err && err.code === 'ENOENT' ) {
 
                 if ( optional ) return {} as ServerConfig;
-                else this.server.debug.exit( `Required configuration file not found: ${filePath}` );
+                else throw new Error( `Required configuration file not found: ${filePath}` );
 
             }
 
-            this.server.debug.exit( `Error loading ${filename}`, err );
+            throw new Error( `Error loading ${filename}: ${ err instanceof Error ? err.message : 'Unknown error' }` );
 
         }
 
@@ -64,10 +63,14 @@ export class ConfigLoader {
             const defConfig = await this.loadConfigFile( 'default.yml' );
             const envConfig = await this.loadConfigFile( `${this._env}.yml`, true );
 
-            this._config = deepmerge( defConfig!, envConfig! );
+            this._config = deepmerge( defConfig, envConfig );
             this._isLoaded = true;
 
-        } catch ( err ) { this.server.debug.exit( `Failed to load configuration`, err ) }
+        } catch ( err ) {
+
+            throw new Error( `Failed to load configuration: ${ err instanceof Error ? err.message : 'Unknown error' }` );
+
+        }
 
     }
 
