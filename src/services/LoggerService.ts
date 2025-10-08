@@ -1,16 +1,24 @@
 import { ILogger } from '@pseinfo/app/interfaces/ILogger';
+import { LogLevel } from '@pseinfo/app/types';
 import { inspect } from 'node:util';
 
 export class LoggerService implements ILogger {
 
     private _enabled: boolean = true;
-    private _logLevel: 'debug' | 'info' | 'warn' | 'error' = 'info';
+    private _logLevel: LogLevel = 'info';
     private _context: string = 'PSEServer';
 
     constructor ( enabled: boolean = true, context: string = 'PSEServer' ) {
 
         this._enabled = enabled;
         this._context = context;
+
+    }
+
+    private shouldLog ( level: LogLevel ) : boolean {
+
+        const levels = { debug: 0, info: 1, warn: 2, error: 3 };
+        return levels[ level ] >= levels[ this._logLevel ];
 
     }
 
@@ -23,6 +31,18 @@ export class LoggerService implements ILogger {
 
         return `[${timestamp}] [${level}] [${this._context}] ${message}${formattedArgs}`;
 
+    }
+
+    public setLogLevel ( level: LogLevel ) : void {
+        this._logLevel = level;
+    }
+
+    public setEnabled ( enabled: boolean ) : void {
+        this._enabled = enabled;
+    }
+
+    public isEnabled () : boolean {
+        return this._enabled;
     }
 
     public debug ( message: string, ...args: any[] ) : void {
@@ -68,14 +88,6 @@ export class LoggerService implements ILogger {
         this.error( message, error, ...args );
         process.exit( 1 );
 
-    }
-
-    public setEnabled ( enabled: boolean ) : void {
-        this._enabled = enabled;
-    }
-
-    public isEnabled () : boolean {
-        return this._enabled;
     }
 
 }

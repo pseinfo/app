@@ -4,6 +4,9 @@ import { Options as RateLimitOptions } from 'express-rate-limit';
 import { $Dictionary } from 'i18next/typescript/helpers';
 import { ServeStaticOptions } from 'serve-static';
 
+// Log levels for application logging
+export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
+
 // Cookie context for storing client preferences
 export type CookieContext = Record< string, string >;
 
