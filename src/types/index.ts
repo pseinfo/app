@@ -6,6 +6,11 @@ import { ServeStaticOptions } from 'serve-static';
 
 export type CookieContext = Record< string, string >;
 
+export interface Assets {
+    js: string[];
+    css: string[];
+}
+
 export interface ServerConfig {
     server: {
         host: string;
@@ -16,6 +21,7 @@ export interface ServerConfig {
     static: {
         options: ServeStaticOptions;
         paths: Record< string, string >;
+        assets?: Partial< Assets >;
     };
     i18n: {
         languages: string[];
@@ -41,10 +47,7 @@ export interface ControllerOptions {
     route: string;
     template: string;
     meta?: PageData;
-    assets?: {
-        js?: string[];
-        css?: string[];
-    };
+    assets?: Partial< Assets >;
     classes?: string[];
     data?: Record< string, any >;
     dict?: $Dictionary;

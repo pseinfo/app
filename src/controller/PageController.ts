@@ -1,6 +1,6 @@
 import { BaseController } from '@pseinfo/app/controller/BaseController';
 import { Server } from '@pseinfo/app/core/Server';
-import { ControllerOptions, CookieContext, GlobalContext, PageData } from '@pseinfo/app/types';
+import { Assets, ControllerOptions, CookieContext, GlobalContext, PageData } from '@pseinfo/app/types';
 import { CookieOptions, Request, Response } from 'express';
 
 export abstract class PageController extends BaseController {
@@ -50,6 +50,18 @@ export abstract class PageController extends BaseController {
 
     }
 
+    protected assetLoader ( server: Server ) : Assets {
+
+        const { js: gJs = [], css: gCss = [] } = server.cfg.cfg.static.assets ?? {};
+        const { js: pJs = [], css: pCss = [] } = this.options.assets ?? {};
+
+        return {
+            js: [ ...new Set( [ ...gJs, ...pJs ] ) ],
+            css: [ ...new Set( [ ...gCss, ...pCss ] ) ]
+        };
+
+    }
+
     protected pageData ( req: Request ) : Required< PageData > {
 
         return { ...{
@@ -65,14 +77,15 @@ export abstract class PageController extends BaseController {
         try {
 
             const globalContext = this.globalContext( server, req );
-            const cookieContext = this.cookieContext( server, req, res );
-            const pageData = this.pageData( req );
 
             res.status( 200 ).render( this.template, {
-                ...globalContext, cookies: cookieContext,
+                ...globalContext,
+                cookies: this.cookieContext( server, req, res ),
+                meta: { ...globalContext.meta, ...this.pageData( req ) },
+                assets: this.assetLoader( server ),
                 bodyClasses: this.bodyClasses(),
-                meta: { ...globalContext.meta, ...pageData },
-                data: this.data, dict: this.dict
+                data: this.data,
+                dict: this.dict
             } );
 
         } catch ( err ) {
