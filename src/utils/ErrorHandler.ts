@@ -1,4 +1,4 @@
-import { ErrorResponse } from '@pseinfo/app/types';
+import { ErrorResponse } from '@pseinfo/app/types/index';
 import { Request, Response } from 'express';
 
 export class ApplicationError extends Error {

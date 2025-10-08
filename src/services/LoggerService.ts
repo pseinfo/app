@@ -1,5 +1,5 @@
-import { ILogger } from '@pseinfo/app/interfaces/ILogger';
-import { LogLevel } from '@pseinfo/app/types';
+import { LogLevel } from '@pseinfo/app/types/index';
+import { ILogger } from '@pseinfo/app/types/interfaces';
 import { inspect } from 'node:util';
 
 export class LoggerService implements ILogger {
