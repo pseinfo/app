@@ -4,11 +4,11 @@ import { inspect } from 'node:util';
 
 export class LoggerService implements ILogger {
 
-    private _enabled: boolean = true;
+    private _enabled: boolean = false;
     private _logLevel: LogLevel = 'info';
     private _context: string = 'PSEServer';
 
-    constructor ( enabled: boolean = true, context: string = 'PSEServer' ) {
+    constructor ( enabled: boolean = false, context: string = 'PSEServer' ) {
 
         this._enabled = enabled;
         this._context = context;
