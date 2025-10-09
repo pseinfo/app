@@ -1,8 +1,8 @@
 import { serviceFactory } from '@pseinfo/app/services/ServiceFactory';
-import { AssetConfig, ControllerOptions, PageData, RequestMethods } from '@pseinfo/app/types/index';
+import { AssetConfig, ControllerOptions, CookieContext, PageData, RequestMethods } from '@pseinfo/app/types/index';
 import { IController } from '@pseinfo/app/types/interfaces';
 import { $Dictionary } from 'i18next/typescript/helpers';
-import { NextFunction, Request, Response } from 'express';
+import { CookieOptions, NextFunction, Request, Response } from 'express';
 
 export abstract class Controller implements IController {
 
@@ -10,6 +10,39 @@ export abstract class Controller implements IController {
 
     constructor ( options: ControllerOptions ) {
         this.options = options;
+    }
+
+    protected securedConnection ( req: Request ) : boolean {
+        return req.secure || req.headers[ 'x-forwarded-proto' ] === 'https';
+    }
+
+    protected canonicalUrl ( req: Request ) : string {
+
+        const protocol = this.securedConnection( req ) ? 'https' : 'http';
+        const host = req.get( 'host' ) || 'localhost';
+
+        return `${protocol}://${host}${req.originalUrl}`;
+
+    }
+
+    protected cookieContext ( req: Request, res: Response ) : CookieContext {
+
+        const cookies: CookieContext = {};
+        const cookieOpts: CookieOptions = {
+            path: '/', sameSite: 'strict',
+            secure: this.securedConnection( req ),
+            expires: new Date( Date.now() + 1.2e9 )
+        };
+
+        for ( const [ key, def ] of Object.entries( serviceFactory.config.cookies ?? {} ) ) {
+
+            cookies[ key ] = req.cookies?.[ key ] || def;
+            res.cookie( key, cookies[ key ], cookieOpts );
+
+        }
+
+        return cookies;
+
     }
 
     protected handleError ( error: Error, req: Request, res: Response ) : void {
