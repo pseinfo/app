@@ -4,11 +4,11 @@ import { inspect } from 'node:util';
 
 export class Logger implements ILogger {
 
-    private _enabled: boolean = false;
+    private _enabled: boolean = true;
     private _logLevel: LogLevel = 'info';
     private _context: string = 'PSEServer';
 
-    constructor ( enabled: boolean = false, context: string = 'PSEServer' ) {
+    constructor ( enabled: boolean = true, context: string = 'PSEServer' ) {
 
         this._enabled = enabled;
         this._context = context;
@@ -74,8 +74,8 @@ export class Logger implements ILogger {
         if ( this._enabled ) {
 
             const errorMessage = error instanceof Error 
-                ? `${message}: ${error.message}\n${error.stack}`
-                : `${message}: ${error}`;
+                ? `${message}\n>> ${error.stack}`
+                : `${message}\n>> ${error}`;
 
             console.error( this.formatMessage( 'ERROR', errorMessage, ...args ) );
 
