@@ -1,5 +1,6 @@
 import { LogLevel, ServerConfig, ServiceContainer } from '@pseinfo/app/types/index';
-import { NextFunction, Request, Response } from 'express';
+import { Server as HttpServer } from 'node:http';
+import { Application, NextFunction, Request, Response } from 'express';
 
 export interface IConfig {
     loadConfiguration () : Promise< void >;
@@ -33,6 +34,9 @@ export interface IServer {
     initialize () : Promise< void >;
     start () : Promise< void >;
     stop () : Promise< void >;
+    getApp () : Application;
+    getHttpServer () : HttpServer | undefined;
+    isRunning () : boolean;
 }
 
 export interface IServiceFactory {

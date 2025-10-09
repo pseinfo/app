@@ -188,4 +188,16 @@ export class Server implements IServer {
 
     }
 
+    public getApp () : Application {
+        return this._app;
+    }
+
+    public getHttpServer () : HttpServer | undefined {
+        return this._server;
+    }
+
+    public isRunning () : boolean {
+        return this._isRunning;
+    }
+
 }
