@@ -1,20 +1,20 @@
 import { ConfigurationService } from '@pseinfo/app/services/ConfigService';
 import { LoggerService } from '@pseinfo/app/services/LoggerService';
 import { ServiceContainer } from '@pseinfo/app/types/index';
-import { IConfig, ILogger } from '@pseinfo/app/types/interfaces';
+import { IConfigService, ILoggerService, IServiceFactory } from '@pseinfo/app/types/interfaces';
 
-export class ServiceFactory {
+export class ServiceFactory implements IServiceFactory {
 
     private static _instance: ServiceFactory;
     private _services: Map< string, any > = new Map();
     private _container: ServiceContainer;
 
-    private constructor () {
-        this._container = this.createServices();
+    public static getInstance () : IServiceFactory {
+        return ServiceFactory._instance &&= new ServiceFactory();
     }
 
-    public static getInstance () : ServiceFactory {
-        return ServiceFactory._instance &&= new ServiceFactory();
+    private constructor () {
+        this._container = this.createServices();
     }
 
     private createServices () : ServiceContainer {
@@ -30,8 +30,8 @@ export class ServiceFactory {
         return this._container;
     }
 
-    public get logger () : ILogger { return this._container.logger }
-    public get config () : IConfig { return this._container.config }
+    public get logger () : ILoggerService { return this._container.logger }
+    public get config () : IConfigService { return this._container.config }
 
     public set < T > ( serviceName: string, service: T ) : void {
         this._services.set( serviceName, service );
