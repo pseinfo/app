@@ -74,7 +74,7 @@ export class I18nMiddleware implements IMiddleware {
 
     }
 
-    public getI18nInstance () : i18n {
+    public getInstance () : i18n {
         return i18next;
     }
 
@@ -84,20 +84,21 @@ export class I18nMiddleware implements IMiddleware {
 
 }
 
-let globalI18n: I18nMiddleware;
+let i18nInstance: I18nMiddleware;
+export { i18nInstance };
 
 export async function configureI18n () : Promise< I18nMiddleware > {
 
-    globalI18n ||= new I18nMiddleware();
-    await globalI18n.initialize();
+    i18nInstance ||= new I18nMiddleware();
+    await i18nInstance.initialize();
 
-    return globalI18n;
+    return i18nInstance;
 
 }
 
 export function i18nMiddleware ( req: Request, res: Response, next: NextFunction ) : void {
 
-    if ( globalI18n ) globalI18n.execute( req, res, next );
+    if ( i18nInstance ) i18nInstance.execute( req, res, next );
     else next();
 
 }

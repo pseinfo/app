@@ -1,4 +1,4 @@
-import {  } from '@pseinfo/app/middleware/I18n';
+import { configureI18n, i18nMiddleware } from '@pseinfo/app/middleware/I18n';
 import { serviceFactory } from '@pseinfo/app/services/ServiceFactory';
 import { IServer } from '@pseinfo/app/types/interfaces';
 import { Server as HttpServer } from 'node:http';
@@ -32,6 +32,10 @@ export class Server implements IServer {
 
         // Rate limiting
         this._app.use( rateLimit( serviceFactory.config.rateLimit ) );
+
+        // Internationalization
+        await configureI18n();
+        this._app.use( i18nMiddleware );
 
     }
 
