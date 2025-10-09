@@ -34,9 +34,9 @@ export abstract class Controller implements IController {
             expires: new Date( Date.now() + 1.2e9 )
         };
 
-        for ( const [ key, def ] of Object.entries( serviceFactory.config.cookies ?? {} ) ) {
+        for ( const [ key, defaultValue ] of Object.entries( serviceFactory.config.cookies ?? {} ) ) {
 
-            cookies[ key ] = req.cookies?.[ key ] || def;
+            cookies[ key ] = req.cookies?.[ key ] || defaultValue;
             res.cookie( key, cookies[ key ], cookieOpts );
 
         }
