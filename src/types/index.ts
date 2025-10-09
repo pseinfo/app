@@ -32,6 +32,7 @@ export interface ServerConfig {
         port: number;
         secure: boolean;
         debug: boolean;
+        logLevel: LogLevel;
     };
     static: {
         options: ServeStaticOptions;

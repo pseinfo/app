@@ -56,8 +56,9 @@ export class ServiceFactory implements IServiceFactory {
             // Load server configuration
             await config.loadConfiguration();
 
-            // Enable or disable logging based on config
+            // Configure logger based on loaded settings
             logger.setEnabled( config.server.debug );
+            logger.setLogLevel( config.server.logLevel );
 
             // Initialize the server instance
             await server.initialize();
