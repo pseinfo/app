@@ -84,6 +84,7 @@ export class I18nMiddleware implements IMiddleware {
 
 }
 
+// global singleton instance
 let i18nInstance: I18nMiddleware;
 export { i18nInstance };
 

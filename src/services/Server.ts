@@ -76,7 +76,7 @@ export class Server implements IServer {
 
         const gracefulShutdown = ( signal: string ) : void => {
 
-            serviceFactory.logger.info( `Received ${signal}, shutting down gracefully ...` );
+            serviceFactory.logger.debug( `Received ${signal}, shutting down gracefully ...` );
 
             this.stop().then( () => process.exit( 0 ) ).catch( ( error ) => {
                 serviceFactory.logger.fatal( `Error during shutdown`, error );
@@ -136,10 +136,10 @@ export class Server implements IServer {
 
                     this._isRunning = true;
                     serviceFactory.logger.info( `Server started successfully` );
-                    serviceFactory.logger.info( `Server running on ${host}:${port}` );
-                    serviceFactory.logger.info( `HTTPS enabled: ${ secure ? 'yes' : 'no' }` );
-                    serviceFactory.logger.info( `Environment: ${ serviceFactory.config.getENV() }` );
-                    serviceFactory.logger.info( `Debug mode: ${ debug ? 'enabled' : 'disabled' }` );
+                    serviceFactory.logger.debug( `Server running on ${host}:${port}` );
+                    serviceFactory.logger.debug( `HTTPS enabled: ${ secure ? 'yes' : 'no' }` );
+                    serviceFactory.logger.debug( `Environment: ${ serviceFactory.config.getENV() }` );
+                    serviceFactory.logger.debug( `Debug mode: ${ debug ? 'enabled' : 'disabled' }` );
                     resolve();
 
                 }
