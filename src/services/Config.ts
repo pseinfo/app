@@ -137,27 +137,27 @@ export class Config implements IConfig {
 
     }
 
-    public getServerConfig () : ServerConfig[ 'server' ] {
+    public get server () : ServerConfig[ 'server' ] {
         return this._config.server;
     }
 
-    public getStaticConfig () : ServerConfig[ 'static' ] {
+    public get static () : ServerConfig[ 'static' ] {
         return this._config.static;
     }
 
-    public getI18nConfig () : ServerConfig[ 'i18n' ] {
+    public get i18n () : ServerConfig[ 'i18n' ] {
         return this._config.i18n;
     }
 
-    public getCompressionConfig () : ServerConfig[ 'compression' ] {
+    public get compression () : ServerConfig[ 'compression' ] {
         return this._config.compression;
     }
 
-    public getRateLimitConfig () : ServerConfig[ 'rateLimit' ] {
+    public get rateLimit () : ServerConfig[ 'rateLimit' ] {
         return this._config.rateLimit;
     }
 
-    public getCookiesConfig () : ServerConfig[ 'cookies' ] {
+    public get cookies () : ServerConfig[ 'cookies' ] {
         return this._config.cookies || {};
     }
 

@@ -15,12 +15,12 @@ export interface IConfig {
     getConfiguration () : ServerConfig;
     isConfigurationLoaded () : boolean;
     getValue < T = any > ( keyPath: string, defaultValue?: T ) : T;
-    getServerConfig () : ServerConfig[ 'server' ];
-    getStaticConfig () : ServerConfig[ 'static' ];
-    getI18nConfig () : ServerConfig[ 'i18n' ];
-    getCompressionConfig () : ServerConfig[ 'compression' ];
-    getRateLimitConfig () : ServerConfig[ 'rateLimit' ];
-    getCookiesConfig () : ServerConfig[ 'cookies' ];
+    server: ServerConfig[ 'server' ];
+    static: ServerConfig[ 'static' ];
+    i18n: ServerConfig[ 'i18n' ];
+    compression: ServerConfig[ 'compression' ];
+    rateLimit: ServerConfig[ 'rateLimit' ];
+    cookies: ServerConfig[ 'cookies' ];
 }
 
 export interface ILogger {

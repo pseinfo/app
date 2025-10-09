@@ -48,7 +48,7 @@ export class ServiceFactory implements IServiceFactory {
         try {
 
             await config.loadConfiguration();
-            logger.setEnabled( config.getValue< boolean >( 'server.debug', false ) );
+            logger.setEnabled( config.server.debug );
 
         } catch ( error ) {
 
