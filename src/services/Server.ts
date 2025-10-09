@@ -113,7 +113,41 @@ export class Server implements IServer {
 
     }
 
-    public async start () : Promise< void > {}
+    public async start () : Promise< void > {
+
+        if ( this._isRunning ) {
+            serviceFactory.logger.warn( `Server is already running` );
+            return;
+        }
+
+        const { port, host, secure, debug } = serviceFactory.config.server;
+
+        return new Promise( ( resolve, reject ) => {
+
+            this._server = this._app.listen( port, host, ( error?: Error ) => {
+
+                if ( error ) {
+
+                    serviceFactory.logger.error( `Failed to start server`, error );
+                    reject( error );
+
+                } else {
+
+                    this._isRunning = true;
+                    serviceFactory.logger.info( `Server started successfully` );
+                    serviceFactory.logger.info( `Server running on ${host}:${port}` );
+                    serviceFactory.logger.info( `HTTPS enabled: ${ secure ? 'yes' : 'no' }` );
+                    serviceFactory.logger.info( `Environment: ${ serviceFactory.config.getENV() }` );
+                    serviceFactory.logger.info( `Debug mode: ${ debug ? 'enabled' : 'disabled' }` );
+                    resolve();
+
+                }
+
+            } );
+
+        } );
+
+    }
 
     public async stop () : Promise< void > {}
 

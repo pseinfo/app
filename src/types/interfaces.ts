@@ -4,6 +4,7 @@ import { NextFunction, Request, Response } from 'express';
 export interface IConfig {
     loadConfiguration () : Promise< void >;
     reloadConfiguration () : Promise< void >;
+    getENV () : string;
     getConfiguration () : ServerConfig;
     isConfigurationLoaded () : boolean;
     getValue < T = any > ( keyPath: string, defaultValue?: T ) : T;
