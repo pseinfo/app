@@ -70,6 +70,8 @@ export interface GlobalContext {
     server: ServerConfig[ 'server' ];
     site: {
         originalUrl: string;
+        secure: boolean;
+        method: string;
         path: string;
         query: Request[ 'query' ];
         params: Request[ 'params' ];
