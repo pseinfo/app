@@ -1,4 +1,5 @@
 import { LogLevel, ServerConfig, ServiceContainer } from '@pseinfo/app/types/index';
+import { NextFunction, Request, Response } from 'express';
 
 export interface IConfig {
     loadConfiguration () : Promise< void >;
@@ -40,4 +41,9 @@ export interface IServiceFactory {
     set < T > ( serviceName: string, service: T ) : void;
     get < T > ( serviceName: string ) : T;
     initializeServices () : Promise< void >;
+}
+
+export interface IMiddleware {
+    initialize () : Promise< void >;
+    execute ( req: Request, res: Response, next: NextFunction ) : Promise< void > | void;
 }
