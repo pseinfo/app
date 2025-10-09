@@ -1,0 +1,4 @@
+server:
+  host: pse-info.de
+  secure: true
+  debug: false
