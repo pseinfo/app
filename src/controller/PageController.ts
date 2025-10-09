@@ -1,6 +1,6 @@
 import { Controller } from '@pseinfo/app/controller/Controller';
 import { serviceFactory } from '@pseinfo/app/services/ServiceFactory';
-import { ControllerOptions, GlobalContext } from '@pseinfo/app/types/index';
+import { ControllerOptions, GlobalContext, MetaData, RenderOptions } from '@pseinfo/app/types/index';
 import { IPageController } from '@pseinfo/app/types/interfaces';
 import { NextFunction, Request, Response } from 'express';
 
@@ -22,12 +22,20 @@ export abstract class PageController extends Controller implements IPageControll
                 path: req.path,
                 query: req.query,
                 params: req.params
-            },
-            meta: {
-                canonical: this.canonicalUrl( req ),
-                robots: 'index, follow'
             }
         };
+
+    }
+
+    protected metaData ( req: Request ) : Required< MetaData > {
+
+        return { ...{
+            title: req.t( `${this.template}:title`, this.dict ) || this.template,
+            description: req.t( `${this.template}:description`, this.dict ),
+            keywords: [],
+            canonical: this.canonicalUrl( req ),
+            robots: 'index, follow'
+        }, ...this.meta };
 
     }
 
@@ -37,12 +45,12 @@ export abstract class PageController extends Controller implements IPageControll
 
             const globalContext = this.buildGlobalContext( req );
             const cookies = this.cookieContext( req, res );
+            const meta = this.metaData( req );
 
             res.status( 200 ).render( this.template, {
-                ...globalContext, cookies,
-                meta: { ...globalContext.meta },
+                ...globalContext, cookies, meta,
                 data: this.data, dict: this.dict
-            } );
+            } as RenderOptions );
 
             serviceFactory.logger.debug( `Page rendered: ${this.template} for ${req.method} ${req.path}` );
 

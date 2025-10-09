@@ -1,4 +1,4 @@
-import { AssetConfig, HealthStatus, LogLevel, PageData, RequestMethods, ServerConfig, ServiceContainer } from '@pseinfo/app/types/index';
+import { AssetConfig, HealthStatus, LogLevel, MetaData, RequestMethods, ServerConfig, ServiceContainer } from '@pseinfo/app/types/index';
 import { Server as HttpServer } from 'node:http';
 import { Application, NextFunction, Request, Response } from 'express';
 import { $Dictionary } from 'i18next/typescript/helpers';
@@ -61,7 +61,7 @@ export interface IController {
     template: string;
     route: string;
     methods: RequestMethods;
-    meta: PageData | undefined;
+    meta: MetaData | undefined;
     assets: Partial< AssetConfig > | undefined;
     classes: string[] | undefined;
     data: Record< string, any > | undefined;

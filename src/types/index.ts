@@ -53,13 +53,11 @@ export interface ServerConfig {
     rateLimit?: Partial< RateLimitOptions >;
 }
 
-// Page metadata for SEO and display
-export interface PageData {
+// Page metadata for SEO
+export interface MetaData {
     title?: string;
     description?: string;
     keywords?: string[];
-    author?: string;
-    viewport?: string;
     canonical?: string;
     robots?: string;
 }
@@ -76,10 +74,6 @@ export interface GlobalContext {
         query: Request[ 'query' ];
         params: Request[ 'params' ];
     };
-    meta: {
-        canonical: string;
-        robots: string;
-    };
 }
 
 // Supported HTTP request methods
@@ -90,9 +84,17 @@ export interface ControllerOptions {
     template: string;
     route: string;
     methods: RequestMethods;
-    meta?: PageData;
+    meta?: MetaData;
     assets?: Partial< AssetConfig >;
     classes?: string[];
+    data?: Record< string, any >;
+    dict?: $Dictionary;
+}
+
+// Rendering options passed to templates
+export interface RenderOptions extends GlobalContext {
+    cookies: CookieContext;
+    meta: Required< MetaData >;
     data?: Record< string, any >;
     dict?: $Dictionary;
 }
