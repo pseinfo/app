@@ -31,6 +31,8 @@ export interface IRouter {}
 
 export interface IServer {
     initialize () : Promise< void >;
+    start () : Promise< void >;
+    stop () : Promise< void >;
 }
 
 export interface IServiceFactory {

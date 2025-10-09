@@ -149,6 +149,43 @@ export class Server implements IServer {
 
     }
 
-    public async stop () : Promise< void > {}
+    public async stop () : Promise< void > {
+
+        if ( ! this._isRunning ) {
+            serviceFactory.logger.warn( `Server is not running` );
+            return;
+        }
+
+        return new Promise( ( resolve, reject ) => {
+
+            if ( this._server ) {
+
+                this._server.close( ( error ) => {
+
+                    if ( error ) {
+
+                        serviceFactory.logger.error( `Error stopping server`, error );
+                        reject( error );
+
+                    } else {
+
+                        this._isRunning = false;
+                        serviceFactory.logger.info( `Server stopped successfully` );
+                        resolve();
+
+                    }
+
+                } );
+
+            } else {
+
+                this._isRunning = false;
+                resolve();
+
+            }
+
+        } );
+
+    }
 
 }
