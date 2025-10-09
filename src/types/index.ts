@@ -1,4 +1,4 @@
-import { IConfig, ILogger } from '@pseinfo/app/types/interfaces';
+import { IConfig, ILogger, IRouter, IServer } from '@pseinfo/app/types/interfaces';
 import { CompressionOptions } from 'compression';
 import { Request } from 'express';
 import { Options as RateLimitOptions } from 'express-rate-limit';
@@ -9,6 +9,8 @@ import { ServeStaticOptions } from 'serve-static';
 export interface ServiceContainer {
     logger: ILogger;
     config: IConfig;
+    router: IRouter;
+    server: IServer;
 }
 
 // Log levels for application logging

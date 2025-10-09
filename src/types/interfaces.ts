@@ -1,14 +1,5 @@
 import { ServerConfig, ServiceContainer } from '@pseinfo/app/types/index';
 
-export interface IServiceFactory {
-    getContainer () : ServiceContainer;
-    logger: ILogger;
-    config: IConfig;
-    set < T > ( serviceName: string, service: T ) : void;
-    get < T > ( serviceName: string ) : T;
-    initializeServices () : Promise< void >;
-}
-
 export interface IConfig {
     loadConfiguration () : Promise< void >;
     reloadConfiguration () : Promise< void >;
@@ -31,4 +22,19 @@ export interface ILogger {
     fatal ( message: string, error?: Error | any, ...args: never[] ) : never;
     setEnabled ( enabled: boolean ) : void;
     isEnabled () : boolean;
+}
+
+export interface IRouter {}
+
+export interface IServer {}
+
+export interface IServiceFactory {
+    getContainer () : ServiceContainer;
+    logger: ILogger;
+    config: IConfig;
+    router: IRouter;
+    server: IServer;
+    set < T > ( serviceName: string, service: T ) : void;
+    get < T > ( serviceName: string ) : T;
+    initializeServices () : Promise< void >;
 }
