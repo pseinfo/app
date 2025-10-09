@@ -1,8 +1,15 @@
+import { IConfig, ILogger } from '@pseinfo/app/types/interfaces';
 import { CompressionOptions } from 'compression';
 import { Request } from 'express';
 import { Options as RateLimitOptions } from 'express-rate-limit';
 import { $Dictionary } from 'i18next/typescript/helpers';
 import { ServeStaticOptions } from 'serve-static';
+
+// Centralized service container interface
+export interface ServiceContainer {
+    logger: ILogger;
+    config: IConfig;
+}
 
 // Log levels for application logging
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
