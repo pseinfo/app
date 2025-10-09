@@ -55,3 +55,7 @@ export interface IMiddleware {
     initialize () : Promise< void >;
     execute ( req: Request, res: Response, next: NextFunction ) : Promise< void > | void;
 }
+
+export interface IController {}
+
+export interface IPageController extends IController {}
