@@ -22,7 +22,15 @@
     "nuclides",
     "open-source"
   ],
-  "scripts": {},
+  "scripts": {
+    "assets:clear": "rm -rf public/css && rm -rf public/js",
+    "assets:css": "npx sass ui/css:public/css --style=compressed --no-source-map",
+    "assets:js": "uglifyjs-folder ui/src/ -o public/js/ --each",
+    "assets": "npm run assets:clear && npm run assets:css && npm run assets:js",
+    "build": "npm run tsc && npm run assets",
+    "start": "cross-env NODE_ENV=development node index.js",
+    "tsc": "tsc && tsc-alias"
+  },
   "dependencies": {
     "compression": "^1.8.1",
     "cookie-parser": "^1.4.7",
