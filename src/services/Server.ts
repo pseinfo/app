@@ -1,4 +1,4 @@
-import { I18n } from '@pseinfo/app/middleware/I18n';
+import {  } from '@pseinfo/app/middleware/I18n';
 import { serviceFactory } from '@pseinfo/app/services/ServiceFactory';
 import { IServer } from '@pseinfo/app/types/interfaces';
 import { Server as HttpServer } from 'node:http';

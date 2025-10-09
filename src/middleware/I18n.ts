@@ -1,11 +1,12 @@
 import { IMiddleware } from '@pseinfo/app/types/interfaces';
 import { serviceFactory } from '@pseinfo/app/services/ServiceFactory';
 import { join } from 'node:path';
-import i18next from 'i18next';
+import { Handler, NextFunction, Request, Response } from 'express';
+import i18next, { i18n } from 'i18next';
 import I18NexFsBackend from 'i18next-fs-backend';
 import { LanguageDetector, handle } from 'i18next-http-middleware';
 
-export class I18n implements IMiddleware {
+export class I18nMiddleware implements IMiddleware {
 
     private _initialized: boolean = false;
 
@@ -61,5 +62,42 @@ export class I18n implements IMiddleware {
         }
 
     }
+
+    public execute ( req: Request, res: Response, next: NextFunction ) : void {
+
+        if ( ! this._initialized ) {
+            serviceFactory.logger.warn( `I18n not initialized, skipping middleware` );
+            return next();
+        }
+
+        handle( i18next )( req, res, next );
+
+    }
+
+    public getI18nInstance () : i18n {
+        return i18next;
+    }
+
+    public getMiddleware () : Handler {
+        return handle( i18next );
+    }
+
+}
+
+let globalI18n: I18nMiddleware;
+
+export async function configureI18n () : Promise< I18nMiddleware > {
+
+    globalI18n ||= new I18nMiddleware();
+    await globalI18n.initialize();
+
+    return globalI18n;
+
+}
+
+export function i18nMiddleware ( req: Request, res: Response, next: NextFunction ) : void {
+
+    if ( globalI18n ) globalI18n.execute( req, res, next );
+    else next();
 
 }
