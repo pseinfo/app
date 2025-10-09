@@ -80,11 +80,14 @@ export interface GlobalContext {
     };
 }
 
+// Supported HTTP request methods
+export type RequestMethods = ( 'get' | 'post' )[];
+
 // Controller configuration
 export interface ControllerOptions {
     template: string;
     route: string;
-    methods: ( 'get' | 'post' )[];
+    methods: RequestMethods;
     meta?: PageData;
     assets?: Partial< AssetConfig >;
     classes?: string[];

@@ -1,6 +1,7 @@
-import { HealthStatus, LogLevel, ServerConfig, ServiceContainer } from '@pseinfo/app/types/index';
+import { AssetConfig, HealthStatus, LogLevel, PageData, RequestMethods, ServerConfig, ServiceContainer } from '@pseinfo/app/types/index';
 import { Server as HttpServer } from 'node:http';
 import { Application, NextFunction, Request, Response } from 'express';
+import { $Dictionary } from 'i18next/typescript/helpers';
 
 export interface IConfig {
     loadConfiguration () : Promise< void >;
@@ -56,6 +57,15 @@ export interface IMiddleware {
     execute ( req: Request, res: Response, next: NextFunction ) : Promise< void > | void;
 }
 
-export interface IController {}
+export interface IController {
+    template: string;
+    route: string;
+    methods: RequestMethods;
+    meta: PageData | undefined;
+    assets: Partial< AssetConfig > | undefined;
+    classes: string[] | undefined;
+    data: Record< string, any > | undefined;
+    dict: $Dictionary | undefined;
+}
 
 export interface IPageController extends IController {}
