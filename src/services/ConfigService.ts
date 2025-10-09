@@ -1,5 +1,6 @@
+import { serviceFactory } from '@pseinfo/app/services/ServiceFactory';
 import { ServerConfig } from '@pseinfo/app/types/index';
-import { IConfig, ILogger } from '@pseinfo/app/types/interfaces';
+import { IConfig } from '@pseinfo/app/types/interfaces';
 import { access, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import deepmerge from 'deepmerge';
@@ -14,7 +15,7 @@ export class ConfigurationService implements IConfig {
     private _isLoaded: boolean = false;
     private _cache: Map< string, any > = new Map();
 
-    constructor ( private logger: ILogger, env?: string, configDir?: string, encoding: BufferEncoding = 'utf8' ) {
+    constructor ( env?: string, configDir?: string, encoding: BufferEncoding = 'utf8' ) {
 
         this._configDir = configDir || join( process.cwd(), 'config' );
         this._encoding = encoding;
@@ -26,7 +27,7 @@ export class ConfigurationService implements IConfig {
     private assertLoaded () : void {
 
         if ( ! this._isLoaded ) {
-            this.logger.fatal( `Configuration not loaded. Call loadConfiguration() first.` );
+            serviceFactory.logger.fatal( `Configuration not loaded. Call loadConfiguration() first.` );
         }
 
     }
@@ -43,7 +44,7 @@ export class ConfigurationService implements IConfig {
             const parsedConfig = load( fileContent ) as any;
 
             if ( ! parsedConfig || typeof parsedConfig !== 'object' ) {
-                this.logger.fatal( `Invalid configuration format in ${filename}` );
+                serviceFactory.logger.fatal( `Invalid configuration format in ${filename}` );
             }
 
             return parsedConfig as Partial< ServerConfig >;
@@ -52,10 +53,10 @@ export class ConfigurationService implements IConfig {
 
             if ( error instanceof Error && 'code' in error && error.code === 'ENOENT' ) {
                 if ( optional ) return {};
-                else this.logger.fatal( `Required configuration file not found: ${filePath}`, error );
+                else serviceFactory.logger.fatal( `Required configuration file not found: ${filePath}`, error );
             }
 
-            this.logger.fatal( `Error loading ${filename}`, error );
+            serviceFactory.logger.fatal( `Error loading ${filename}`, error );
 
         }
 
@@ -74,7 +75,7 @@ export class ConfigurationService implements IConfig {
 
         } catch ( error ) {
 
-            this.logger.fatal( `Failed to load configuration`, error );
+            serviceFactory.logger.fatal( `Failed to load configuration`, error );
 
         }
 
@@ -104,7 +105,7 @@ export class ConfigurationService implements IConfig {
         return this._isLoaded;
     }
 
-    public getValue< T = any >( keyPath: string, defaultValue?: T ) : T {
+    public getValue < T = any > ( keyPath: string, defaultValue?: T ) : T {
 
         this.assertLoaded();
 
