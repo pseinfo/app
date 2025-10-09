@@ -49,17 +49,21 @@ export class ServiceFactory implements IServiceFactory {
 
     public async initializeServices () : Promise< void > {
 
-        const { logger, config } = this._container;
+        const { logger, config, server } = this._container;
 
         try {
 
+            // Load server configuration
             await config.loadConfiguration();
+
+            // Enable or disable logging based on config
             logger.setEnabled( config.server.debug );
 
+            // Initialize the server instance
+            await server.initialize();
+
         } catch ( error ) {
-
             logger.fatal( `Failed to initialize services`, error );
-
         }
 
     }

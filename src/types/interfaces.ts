@@ -26,7 +26,9 @@ export interface ILogger {
 
 export interface IRouter {}
 
-export interface IServer {}
+export interface IServer {
+    initialize () : Promise< void >;
+}
 
 export interface IServiceFactory {
     getContainer () : ServiceContainer;

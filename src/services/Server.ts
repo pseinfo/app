@@ -12,4 +12,10 @@ export class Server implements IServer {
         this._app = express();
     }
 
+    public async initialize () : Promise< void > {
+
+        //
+
+    }
+
 }

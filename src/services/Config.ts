@@ -74,9 +74,7 @@ export class Config implements IConfig {
             this._cache.clear();
 
         } catch ( error ) {
-
             serviceFactory.logger.fatal( `Failed to load configuration`, error );
-
         }
 
     }

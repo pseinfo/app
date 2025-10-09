@@ -7,12 +7,7 @@ export class ApplicationError extends Error {
     public readonly isOperational: boolean;
     public readonly details?: Record< string, any >;
 
-    constructor (
-        message: string,
-        statusCode: number = 500,
-        isOperational: boolean = true,
-        details?: Record< string, any >
-    ) {
+    constructor ( message: string, statusCode: number = 500, isOperational: boolean = true, details?: Record< string, any > ) {
 
         super( message );
 
@@ -77,11 +72,7 @@ export class RateLimitError extends ApplicationError {
 
 export class ErrorHandler {
 
-    public static handleError (
-        error: Error | ApplicationError,
-        req: Request,
-        res: Response
-    ) : void {
+    public static handleError ( error: Error | ApplicationError, req: Request, res: Response ) : void {
 
         let statusCode = 500;
         let message = 'Internal Server Error';
@@ -119,9 +110,7 @@ export class ErrorHandler {
 
     }
 
-    public static asyncWrapper (
-        handler: ( req: Request, res: Response ) => Promise< any >
-    ) {
+    public static asyncWrapper ( handler: ( req: Request, res: Response ) => Promise< any > ) {
 
         return async ( req: Request, res: Response, next: Function ) : Promise< void > => {
             try { await handler( req, res ) }
@@ -130,11 +119,7 @@ export class ErrorHandler {
 
     }
 
-    public static logError (
-        error: Error,
-        req: Request,
-        context?: Record< string, any >
-    ) : void {
+    public static logError ( error: Error, req: Request, context?: Record< string, any > ) : void {
 
         console.error( 'Error:', {
             message: error.message,

@@ -13,6 +13,11 @@ export class PSEApplication {
 
     public async initialize () : Promise< void > {
 
+        if ( this._initialized ) {
+            serviceFactory.logger.warn( `Application is already initialized.` );
+            return;
+        }
+
         await serviceFactory.initializeServices();
         this._initialized = true;
 
