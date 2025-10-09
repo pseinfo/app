@@ -1,6 +1,7 @@
 import { AssetConfig, ControllerOptions, PageData, RequestMethods } from '@pseinfo/app/types/index';
 import { IController } from '@pseinfo/app/types/interfaces';
 import { $Dictionary } from 'i18next/typescript/helpers';
+import { NextFunction, Request, Response } from 'express';
 
 export abstract class Controller implements IController {
 
@@ -18,5 +19,7 @@ export abstract class Controller implements IController {
     public get classes () : string[] | undefined { return this.options.classes }
     public get data () : Record< string, any > | undefined { return this.options.data }
     public get dict () : $Dictionary | undefined { return this.options.dict }
+
+    public abstract handle ( req: Request, res: Response, next: NextFunction ) : Promise< void > | void;
 
 }

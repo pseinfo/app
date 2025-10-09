@@ -66,6 +66,7 @@ export interface IController {
     classes: string[] | undefined;
     data: Record< string, any > | undefined;
     dict: $Dictionary | undefined;
+    handle ( req: Request, res: Response, next: NextFunction ) : Promise< void > | void;
 }
 
 export interface IPageController extends IController {}
