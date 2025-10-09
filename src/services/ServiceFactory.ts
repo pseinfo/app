@@ -19,7 +19,7 @@ export class ServiceFactory implements IServiceFactory {
 
     private createServices () : ServiceContainer {
 
-        const logger = new LoggerService( true, 'PSEServer' );
+        const logger = new LoggerService();
         const config = new ConfigurationService();
 
         return { logger, config };
