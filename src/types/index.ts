@@ -80,10 +80,11 @@ export interface GlobalContext {
     };
 }
 
-// Controller configuration (legacy support)
+// Controller configuration
 export interface ControllerOptions {
-    route: string;
     template: string;
+    route: string;
+    methods: ( 'get' | 'post' )[];
     meta?: PageData;
     assets?: Partial< AssetConfig >;
     classes?: string[];
