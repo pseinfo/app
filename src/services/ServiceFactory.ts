@@ -41,6 +41,23 @@ export class ServiceFactory implements IServiceFactory {
         return this._services.get( serviceName ) as T;
     }
 
+    public async initializeServices () : Promise< void > {
+
+        const { logger, config } = this._container;
+
+        try {
+
+            await config.loadConfiguration();
+            logger.setEnabled( config.getValue< boolean >( 'server.debug', false ) );
+
+        } catch ( error ) {
+
+            logger.fatal( `Failed to initialize services`, error );
+
+        }
+
+    }
+
 }
 
 export const serviceFactory = ServiceFactory.getInstance();

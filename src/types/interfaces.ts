@@ -6,6 +6,7 @@ export interface IServiceFactory {
     config: IConfigService;
     set < T > ( serviceName: string, service: T ) : void;
     get < T > ( serviceName: string ) : T;
+    initializeServices () : Promise< void >;
 }
 
 export interface IConfigService {
