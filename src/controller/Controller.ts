@@ -1,3 +1,4 @@
+import { serviceFactory } from '@pseinfo/app/services/ServiceFactory';
 import { AssetConfig, ControllerOptions, PageData, RequestMethods } from '@pseinfo/app/types/index';
 import { IController } from '@pseinfo/app/types/interfaces';
 import { $Dictionary } from 'i18next/typescript/helpers';
@@ -9,6 +10,38 @@ export abstract class Controller implements IController {
 
     constructor ( options: ControllerOptions ) {
         this.options = options;
+    }
+
+    protected handleError ( error: Error, req: Request, res: Response ) : void {
+
+        serviceFactory.logger.error( `Controller error`, error, {
+            route: this.route,
+            template: this.template,
+            url: req.url,
+            method: req.method
+        } );
+
+        if ( ! res.headersSent ) {
+
+            const production = serviceFactory.config.getENV() === 'production';
+
+            res.status( 500 ).render( 'base/error', {
+                error: {
+                    message: production ? 'Internal Server Error' : error.message,
+                    stack: production ? undefined : error.stack
+                }
+            } );
+
+        }
+
+    }
+
+    protected sendSuccess ( res: Response, data: any, statusCode: number = 200 ) : void {
+        res.status( statusCode ).json( { success: true, data } );
+    }
+
+    protected sendError ( res: Response, message: string, statusCode: number = 400 ) : void {
+        res.status( statusCode ).json( { success: false, error: message } );
     }
 
     public get template () : string { return this.options.template }
