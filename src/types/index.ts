@@ -93,8 +93,9 @@ export interface ControllerOptions {
 
 // Health check status
 export interface HealthStatus {
-    status: 'healthy' | 'degraded' | 'unhealthy';
+    status: 'running' | 'stopped';
     timestamp: string;
+    env: string;
     uptime: number;
     memory: {
         used: number;
@@ -103,7 +104,6 @@ export interface HealthStatus {
     };
     pid: number;
     version: string;
-    environment: string;
 }
 
 // Error response structure

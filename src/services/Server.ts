@@ -1,5 +1,6 @@
 import { configureI18n, i18nMiddleware } from '@pseinfo/app/middleware/I18n';
 import { serviceFactory } from '@pseinfo/app/services/ServiceFactory';
+import { HealthStatus } from '@pseinfo/app/types/index';
 import { IServer } from '@pseinfo/app/types/interfaces';
 import { Server as HttpServer } from 'node:http';
 import { join } from 'node:path';
@@ -198,6 +199,26 @@ export class Server implements IServer {
 
     public isRunning () : boolean {
         return this._isRunning;
+    }
+
+    public getHealthStatus () : HealthStatus {
+
+        const { heapTotal, heapUsed, external } = process.memoryUsage();
+
+        return {
+            status: this.isRunning() ? 'running' : 'stopped',
+            timestamp: new Date().toISOString(),
+            env: serviceFactory.config.getENV(),
+            uptime: process.uptime(),
+            memory: {
+                used: heapUsed,
+                total: heapTotal,
+                external
+            },
+            pid: process.pid,
+            version: process.version
+        };
+
     }
 
 }

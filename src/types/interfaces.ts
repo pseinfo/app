@@ -1,4 +1,4 @@
-import { LogLevel, ServerConfig, ServiceContainer } from '@pseinfo/app/types/index';
+import { HealthStatus, LogLevel, ServerConfig, ServiceContainer } from '@pseinfo/app/types/index';
 import { Server as HttpServer } from 'node:http';
 import { Application, NextFunction, Request, Response } from 'express';
 
@@ -37,6 +37,7 @@ export interface IServer {
     getApp () : Application;
     getHttpServer () : HttpServer | undefined;
     isRunning () : boolean;
+    getHealthStatus () : HealthStatus;
 }
 
 export interface IServiceFactory {
