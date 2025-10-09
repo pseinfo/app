@@ -71,6 +71,24 @@ export class Server implements IServer {
 
     }
 
+    private setupGracefulShutdown () : void {
+
+        const gracefulShutdown = ( signal: string ) : void => {
+
+            serviceFactory.logger.info( `Received ${signal}, shutting down gracefully ...` );
+
+            this.stop().then( () => process.exit( 0 ) ).catch( ( error ) => {
+                serviceFactory.logger.fatal( `Error during shutdown`, error );
+            } );
+
+        };
+
+        process.on( 'SIGTERM', () => gracefulShutdown( 'SIGTERM' ) );
+        process.on( 'SIGINT', () => gracefulShutdown( 'SIGINT' ) );
+        process.on( 'SIGUSR2', () => gracefulShutdown( 'SIGUSR2' ) );
+
+    }
+
     public async initialize () : Promise< void > {
 
         serviceFactory.logger.debug( `Initializing server ...` );
@@ -86,10 +104,17 @@ export class Server implements IServer {
             // Configure static file serving
             this.configureStaticFiles();
 
+            // Setup graceful shutdown
+            this.setupGracefulShutdown();
+
         } catch ( error ) {
             serviceFactory.logger.error( `Server initialization error`, error );
         }
 
     }
+
+    public async start () : Promise< void > {}
+
+    public async stop () : Promise< void > {}
 
 }
