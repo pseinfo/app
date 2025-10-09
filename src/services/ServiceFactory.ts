@@ -12,7 +12,7 @@ export class ServiceFactory implements IServiceFactory {
     private _container: ServiceContainer;
 
     public static getInstance () : IServiceFactory {
-        return ServiceFactory._instance &&= new ServiceFactory();
+        return ServiceFactory._instance ||= new ServiceFactory();
     }
 
     private constructor () {

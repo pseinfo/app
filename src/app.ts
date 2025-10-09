@@ -8,10 +8,10 @@ export class PSEApplication {
     private constructor () {}
 
     public static getInstance () : PSEApplication {
-        return PSEApplication._instance &&= new PSEApplication();
+        return PSEApplication._instance ||= new PSEApplication();
     }
 
-    public async init () : Promise< void > {
+    public async initialize () : Promise< void > {
 
         await serviceFactory.initializeServices();
         this._initialized = true;
