@@ -94,6 +94,8 @@ export interface ControllerOptions {
 // Rendering options passed to templates
 export interface RenderOptions extends GlobalContext {
     cookies: CookieContext;
+    assets: AssetConfig;
+    classes: string;
     meta: Required< MetaData >;
     data?: Record< string, any >;
     dict?: $Dictionary;

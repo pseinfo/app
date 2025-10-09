@@ -1,6 +1,6 @@
 import { Controller } from '@pseinfo/app/controller/Controller';
 import { serviceFactory } from '@pseinfo/app/services/ServiceFactory';
-import { ControllerOptions, GlobalContext, MetaData, RenderOptions } from '@pseinfo/app/types/index';
+import { AssetConfig, ControllerOptions, GlobalContext, MetaData, RenderOptions } from '@pseinfo/app/types/index';
 import { IPageController } from '@pseinfo/app/types/interfaces';
 import { NextFunction, Request, Response } from 'express';
 
@@ -10,7 +10,7 @@ export abstract class PageController extends Controller implements IPageControll
         super( options );
     }
 
-    protected buildGlobalContext ( req: Request ) : GlobalContext {
+    protected globalContext ( req: Request ) : GlobalContext {
 
         return {
             i18n: req.t?.bind( req ) || ( ( key: string ) => key ),
@@ -24,6 +24,27 @@ export abstract class PageController extends Controller implements IPageControll
                 params: req.params
             }
         };
+
+    }
+
+    protected assetLoader () : AssetConfig {
+
+        const globalAssets = serviceFactory.config.static.assets || {};
+        const pageAssets = this.assets || {};
+
+        return {
+            js: [ ...new Set( [ ...( globalAssets.js || [] ), ...( pageAssets.js || [] ) ] ) ],
+            css: [ ...new Set( [ ...( globalAssets.css || [] ), ...( pageAssets.css || [] ) ] ) ]
+        };
+
+    }
+
+    protected bodyClasses () : string {
+
+        const baseClasses = [ 'pt', 'pt-page', `pt-${this.template}` ];
+        const pageClasses = this.classes || [];
+
+        return [ ...baseClasses, ...pageClasses ].join( ' ' ).trim();
 
     }
 
@@ -43,12 +64,14 @@ export abstract class PageController extends Controller implements IPageControll
 
         try {
 
-            const globalContext = this.buildGlobalContext( req );
+            const globalContext = this.globalContext( req );
             const cookies = this.cookieContext( req, res );
+            const assets = this.assetLoader();
+            const classes = this.bodyClasses();
             const meta = this.metaData( req );
 
             res.status( 200 ).render( this.template, {
-                ...globalContext, cookies, meta,
+                ...globalContext, cookies, assets, classes, meta,
                 data: this.data, dict: this.dict
             } as RenderOptions );
 
