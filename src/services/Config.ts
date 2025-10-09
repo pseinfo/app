@@ -1,4 +1,4 @@
-import { serviceFactory } from '@pseinfo/app/services/Factory';
+import { serviceFactory } from '@pseinfo/app/services/ServiceFactory';
 import { ServerConfig } from '@pseinfo/app/types/index';
 import { IConfig } from '@pseinfo/app/types/interfaces';
 import { access, readFile } from 'node:fs/promises';
