@@ -1,7 +1,7 @@
-import { ConfigurationService } from '@pseinfo/app/services/ConfigService';
-import { LoggerService } from '@pseinfo/app/services/LoggerService';
+import { Config } from '@pseinfo/app/services/Config';
+import { Logger } from '@pseinfo/app/services/Logger';
 import { ServiceContainer } from '@pseinfo/app/types/index';
-import { IConfigService, ILoggerService, IServiceFactory } from '@pseinfo/app/types/interfaces';
+import { IConfig, ILogger, IServiceFactory } from '@pseinfo/app/types/interfaces';
 
 export class ServiceFactory implements IServiceFactory {
 
@@ -19,8 +19,8 @@ export class ServiceFactory implements IServiceFactory {
 
     private createServices () : ServiceContainer {
 
-        const logger = new LoggerService();
-        const config = new ConfigurationService();
+        const logger = new Logger();
+        const config = new Config();
 
         return { logger, config };
 
@@ -30,8 +30,8 @@ export class ServiceFactory implements IServiceFactory {
         return this._container;
     }
 
-    public get logger () : ILoggerService { return this._container.logger }
-    public get config () : IConfigService { return this._container.config }
+    public get logger () : ILogger { return this._container.logger }
+    public get config () : IConfig { return this._container.config }
 
     public set < T > ( serviceName: string, service: T ) : void {
         this._services.set( serviceName, service );

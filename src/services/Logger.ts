@@ -1,8 +1,8 @@
 import { LogLevel } from '@pseinfo/app/types/index';
-import { ILoggerService } from '@pseinfo/app/types/interfaces';
+import { ILogger } from '@pseinfo/app/types/interfaces';
 import { inspect } from 'node:util';
 
-export class LoggerService implements ILoggerService {
+export class Logger implements ILogger {
 
     private _enabled: boolean = false;
     private _logLevel: LogLevel = 'info';

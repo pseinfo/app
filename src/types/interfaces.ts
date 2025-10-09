@@ -2,14 +2,14 @@ import { ServerConfig, ServiceContainer } from '@pseinfo/app/types/index';
 
 export interface IServiceFactory {
     getContainer () : ServiceContainer;
-    logger: ILoggerService;
-    config: IConfigService;
+    logger: ILogger;
+    config: IConfig;
     set < T > ( serviceName: string, service: T ) : void;
     get < T > ( serviceName: string ) : T;
     initializeServices () : Promise< void >;
 }
 
-export interface IConfigService {
+export interface IConfig {
     loadConfiguration () : Promise< void >;
     reloadConfiguration () : Promise< void >;
     getConfiguration () : ServerConfig;
@@ -23,7 +23,7 @@ export interface IConfigService {
     getCookiesConfig () : ServerConfig[ 'cookies' ];
 }
 
-export interface ILoggerService {
+export interface ILogger {
     debug ( message: string, ...args: any[] ) : void;
     info ( message: string, ...args: any[] ) : void;
     warn ( message: string, ...args: any[] ) : void;

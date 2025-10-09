@@ -1,12 +1,12 @@
-import { serviceFactory } from '@pseinfo/app/services/ServiceFactory';
+import { serviceFactory } from '@pseinfo/app/services/Factory';
 import { ServerConfig } from '@pseinfo/app/types/index';
-import { IConfigService } from '@pseinfo/app/types/interfaces';
+import { IConfig } from '@pseinfo/app/types/interfaces';
 import { access, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import deepmerge from 'deepmerge';
 import { load } from 'js-yaml';
 
-export class ConfigurationService implements IConfigService {
+export class Config implements IConfig {
 
     private readonly _configDir: string;
     private readonly _encoding: BufferEncoding;
