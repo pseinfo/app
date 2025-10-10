@@ -75,7 +75,51 @@ export class Router implements IRouter {
 
     }
 
-    public setupErrorHandling () : void {}
+    public setupErrorHandling () : void {
+
+        // Default 404 handler
+        this.useErrorHandler( ( err: Error, req: Request, res: Response, next: NextFunction ) => {
+
+            if ( res.headersSent ) return next( err );
+
+            const statusCode = res.statusCode === 200 ? 404 : res.statusCode;
+
+            res.status( statusCode ).json( {
+                error: {
+                    status: statusCode,
+                    message: err.message || req.t( 'error-404' ) || 'Not Found',
+                    url: req.url,
+                    method: req.method,
+                    path: req.path
+                }
+            } );
+
+        } );
+
+        // Default error handler
+        this.useErrorHandler( ( err: Error, req: Request, res: Response, next: NextFunction ) => {
+
+            if ( res.headersSent ) return next( err );
+
+            serviceFactory.logger.error( `Unhandled error`, err, { url: req.url, method: req.method } );
+
+            const statusCode = ( err as any ).statusCode || 500;
+            const production = process.env.NODE_ENV === 'production';
+
+            res.status( statusCode ).json( {
+                error: {
+                    status: statusCode,
+                    ...( ! production && { stack: err.stack } ),
+                    message: production ? req.t( 'error-500' ) || 'Internal Server Error' : err.message,
+                    url: req.url,
+                    method: req.method,
+                    path: req.path
+                }
+            } );
+
+        } );
+
+    }
 
     public removeController ( route: string ) : boolean {
 

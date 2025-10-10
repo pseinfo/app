@@ -77,10 +77,7 @@ export abstract class PageController extends Controller implements IPageControll
 
             serviceFactory.logger.debug( `Page rendered: ${this.template} for ${req.method} ${req.path}` );
 
-        } catch ( error ) {
-            this.handleError( error as Error, req, res );
-            next( error );
-        }
+        } catch ( error ) { next( error ) }
 
     }
 
