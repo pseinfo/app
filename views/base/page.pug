@@ -1,26 +1,39 @@
 doctype html
 html( lang= cookies.locale, theme= cookies.theme, units= cookies.units )
   head
+
+    // Basic meta tags
     meta( charset= "utf-8" )
     meta( name= "viewport", content= "width=device-width, initial-scale=1.0" )
     meta( name= "theme-color", content= "#2a80ad" )
     link( rel= "icon", href= "assets/favicon.ico", sizes= "48x48", type= "image/x-icon" )
     link( rel= "icon", href= "assets/atom.svg", sizes= "any", type= "image/svg+xml" )
 
-    title= meta.title || i18n( 'generic:title' )
+    // Meta tags
+    title= meta.title || i18n( 'generic:name' )
+    meta( property= "og:type", content= "website" )
+    meta( property= "og:site_name", content= i18n( 'generic:name' ) )
+    meta( name= "twitter:card", content= "summary" )
+    meta( name= "twitter:site", content= "@komed3dev" )
+    if meta.title
+      meta( property= "og:title", content= meta.title )
+      meta( name= "twitter:title", content= meta.title )
     if meta.description
       meta( name= "description", content= meta.description )
+      meta( property= "og:description", content= meta.description )
+      meta( name= "twitter:description", content= meta.description )
     if meta.keywords.length
       meta( name= "keywords", content= meta.keywords.join( ', ' ) )
     if meta.canonical
       link( rel= "canonical", href= meta.canonical )
+      meta( property= "og:url", content= meta.canonical )
+      meta( name= "twitter:url", content= meta.canonical )
     if meta.robots
       meta( name= "robots", content= meta.robots )
 
+  // Content
   body#top( class= bodyClasses )
     include ../components/header.pug
-
     main#main.pt-main( role= "main", aria-label= "Content" )
       block main
-
     include ../components/footer.pug
