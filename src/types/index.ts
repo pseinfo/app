@@ -25,8 +25,16 @@ export type CookieContext = Record< string, string >;
 
 // Asset management interface
 export interface AssetConfig {
-    js: string[];
-    css: string[];
+    js: Array< {
+        path: string;
+        module?: boolean;
+        async?: boolean;
+        defer?: boolean;
+    } >;
+    css: Array< {
+        href: string;
+        media?: string;
+    } >;
 }
 
 // Server configuration with validation

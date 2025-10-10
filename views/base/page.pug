@@ -34,6 +34,12 @@ html( lang= cookies.locale, theme= cookies.theme, units= cookies.units )
       meta( property= "og:image", content= meta.ogImage )
       meta( name= "twitter:image", content= meta.ogImage )
 
+    //- Assets
+    each js in assets.js
+      script( src= js.path, type= js.module ? "module" : "text/javascript", async= js.async, defer= js.defer )
+    each css in assets.css
+      link( rel= "stylesheet", href= css.href, media= css.media || 'all' )
+
   //- Site content
   body#top( class= bodyClasses )
     include ../components/header.pug
