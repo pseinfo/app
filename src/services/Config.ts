@@ -135,28 +135,11 @@ export class Config implements IConfig {
 
     }
 
-    public get server () : ServerConfig[ 'server' ] {
-        return this._config.server;
-    }
-
-    public get static () : ServerConfig[ 'static' ] {
-        return this._config.static;
-    }
-
-    public get i18n () : ServerConfig[ 'i18n' ] {
-        return this._config.i18n;
-    }
-
-    public get compression () : ServerConfig[ 'compression' ] {
-        return this._config.compression;
-    }
-
-    public get rateLimit () : ServerConfig[ 'rateLimit' ] {
-        return this._config.rateLimit;
-    }
-
-    public get cookies () : ServerConfig[ 'cookies' ] {
-        return this._config.cookies || {};
-    }
+    public get server () : ServerConfig[ 'server' ] { return this._config.server }
+    public get static () : ServerConfig[ 'static' ] { return this._config.static }
+    public get i18n () : ServerConfig[ 'i18n' ] { return this._config.i18n }
+    public get compression () : ServerConfig[ 'compression' ] { return this._config.compression }
+    public get rateLimit () : ServerConfig[ 'rateLimit' ] { return this._config.rateLimit }
+    public get cookies () : ServerConfig[ 'cookies' ] { return this._config.cookies || {} }
 
 }
