@@ -55,7 +55,8 @@ export abstract class PageController extends Controller implements IPageControll
             description: req.t( `${this.template}:description`, this.dict ),
             keywords: [],
             canonical: this.canonicalUrl( req ),
-            robots: 'index, follow'
+            robots: 'index, follow',
+            ogImage: null
         }, ...this.meta };
 
     }

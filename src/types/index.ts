@@ -64,6 +64,7 @@ export interface MetaData {
     keywords?: string[];
     canonical?: string;
     robots?: string;
+    ogImage?: string | null;
 }
 
 // Template rendering context
