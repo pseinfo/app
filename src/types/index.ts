@@ -84,9 +84,9 @@ export interface ControllerOptions {
     template: string;
     route: string;
     methods: RequestMethods;
-    meta?: MetaData;
     assets?: Partial< AssetConfig >;
     classes?: string[];
+    meta?: MetaData;
     data?: Record< string, any >;
     dict?: $Dictionary;
 }
