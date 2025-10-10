@@ -1,6 +1,6 @@
 import { IConfig, ILogger, IRouter, IServer } from '@pseinfo/app/types/interfaces';
 import { CompressionOptions } from 'compression';
-import { Request } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { Options as RateLimitOptions } from 'express-rate-limit';
 import { $Dictionary } from 'i18next/typescript/helpers';
 import { ServeStaticOptions } from 'serve-static';
@@ -12,6 +12,10 @@ export interface ServiceContainer {
     router: IRouter;
     server: IServer;
 }
+
+// Request handler and error handler types
+export type RequestHandler = ( req: Request, res: Response, next: NextFunction ) => Promise< void > | void;
+export type ErrorHandler = ( err: Error, req: Request, res: Response, next: NextFunction ) => void;
 
 // Log levels for application logging
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
