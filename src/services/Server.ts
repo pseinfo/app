@@ -72,6 +72,14 @@ export class Server implements IServer {
 
     }
 
+    private configureRoutes () : void {
+
+        serviceFactory.logger.debug( `Configuring routes ...` );
+
+        this._app.use( '/', serviceFactory.router.router );
+
+    }
+
     private setupGracefulShutdown () : void {
 
         const gracefulShutdown = ( signal: string ) : void => {
@@ -104,6 +112,9 @@ export class Server implements IServer {
 
             // Configure static file serving
             this.configureStaticFiles();
+
+            // Configure routes
+            this.configureRoutes();
 
             // Setup graceful shutdown
             this.setupGracefulShutdown();
