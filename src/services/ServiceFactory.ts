@@ -1,3 +1,4 @@
+import { registry } from '@pseinfo/app/controller/registry';
 import { Config } from '@pseinfo/app/services/Config';
 import { Logger } from '@pseinfo/app/services/Logger';
 import { Router } from '@pseinfo/app/services/Router';
@@ -49,7 +50,7 @@ export class ServiceFactory implements IServiceFactory {
 
     public async initializeServices () : Promise< void > {
 
-        const { logger, config, server } = this._container;
+        const { logger, config, router, server } = this._container;
 
         try {
 
@@ -59,6 +60,10 @@ export class ServiceFactory implements IServiceFactory {
             // Configure logger based on loaded settings
             logger.setEnabled( config.server.debug );
             logger.setLogLevel( config.server.logLevel );
+
+            // Register controllers
+            router.registerControllers( registry );
+            router.setupErrorHandling();
 
             // Initialize the server instance
             await server.initialize();
