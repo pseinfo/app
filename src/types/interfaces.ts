@@ -1,7 +1,30 @@
-import { AssetConfig, HealthStatus, LogLevel, MetaData, RequestMethods, ServerConfig, ServiceContainer } from '@pseinfo/app/types/index';
+import {
+    AssetConfig, HealthStatus, ErrorHandler, LogLevel, MetaData, RequestHandler,
+    RequestMethods, ServerConfig, ServiceContainer
+} from '@pseinfo/app/types/index';
+
 import { Server as HttpServer } from 'node:http';
-import { Application, NextFunction, Request, Response } from 'express';
+import { Application, NextFunction, Request, Response, Router as ExpressRouter } from 'express';
 import { $Dictionary } from 'i18next/typescript/helpers';
+
+export interface IMiddleware {
+    initialize () : Promise< void >;
+    execute ( req: Request, res: Response, next: NextFunction ) : Promise< void > | void;
+}
+
+export interface IController {
+    template: string;
+    route: string;
+    methods: RequestMethods;
+    meta: MetaData | undefined;
+    assets: Partial< AssetConfig > | undefined;
+    classes: string[] | undefined;
+    data: Record< string, any > | undefined;
+    dict: $Dictionary | undefined;
+    handle ( req: Request, res: Response, next: NextFunction ) : Promise< void > | void;
+}
+
+export interface IPageController extends IController {}
 
 export interface IConfig {
     loadConfiguration () : Promise< void >;
@@ -29,7 +52,18 @@ export interface ILogger {
     fatal ( message: string, error?: Error | any, ...args: never[] ) : never;
 }
 
-export interface IRouter {}
+export interface IRouter {
+    router: ExpressRouter;
+    controllers: Map< string, IController >;
+    registerController ( controller: IController ) : void;
+    registerControllers ( controllers: IController[] ) : void;
+    useMiddleware ( handler: RequestHandler ) : void;
+    useErrorHandler ( handler: ErrorHandler ) : void;
+    setupErrorHandling () : void;
+    getController ( route: string ) : IController | undefined;
+    removeController ( route: string ) : boolean;
+    clearControllers () : void;
+}
 
 export interface IServer {
     initialize () : Promise< void >;
@@ -51,22 +85,3 @@ export interface IServiceFactory {
     get < T > ( serviceName: string ) : T;
     initializeServices () : Promise< void >;
 }
-
-export interface IMiddleware {
-    initialize () : Promise< void >;
-    execute ( req: Request, res: Response, next: NextFunction ) : Promise< void > | void;
-}
-
-export interface IController {
-    template: string;
-    route: string;
-    methods: RequestMethods;
-    meta: MetaData | undefined;
-    assets: Partial< AssetConfig > | undefined;
-    classes: string[] | undefined;
-    data: Record< string, any > | undefined;
-    dict: $Dictionary | undefined;
-    handle ( req: Request, res: Response, next: NextFunction ) : Promise< void > | void;
-}
-
-export interface IPageController extends IController {}

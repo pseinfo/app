@@ -14,9 +14,12 @@ export class Router implements IRouter {
         this._router = ExpressRouter();
     }
 
+    public get router () : ExpressRouter { return this._router }
+    public get controllers () : Map< string, IController > { return this._controllers }
+
     public registerController ( controller: IController ) : void {}
 
-    public registerControllers ( controller: IController[] ) : void {}
+    public registerControllers ( controllers: IController[] ) : void {}
 
     public useMiddleware ( handler: RequestHandler ) : void {
 
@@ -30,6 +33,25 @@ export class Router implements IRouter {
         this._errorHandlers.push( handler );
         this._router.use( handler );
 
+    }
+
+    public setupErrorHandling () : void {}
+
+    public getController ( route: string ) : IController | undefined {
+        return this._controllers.get( route );
+    }
+
+    public removeController ( route: string ) : boolean {
+
+        const removed = this._controllers.delete( route );
+        if ( removed ) serviceFactory.logger.info( `Controller removed: ${route}` );
+
+        return removed;
+
+    }
+
+    public clearControllers () : void {
+        this._controllers.clear();
     }
 
 }
