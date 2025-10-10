@@ -2,14 +2,14 @@ doctype html
 html( lang= cookies.locale, theme= cookies.theme, units= cookies.units )
   head
 
-    // Basic meta tags
+    //- Basic meta tags
     meta( charset= "utf-8" )
     meta( name= "viewport", content= "width=device-width, initial-scale=1.0" )
     meta( name= "theme-color", content= "#2a80ad" )
     link( rel= "icon", href= "assets/favicon.ico", sizes= "48x48", type= "image/x-icon" )
     link( rel= "icon", href= "assets/atom.svg", sizes= "any", type= "image/svg+xml" )
 
-    // Meta tags
+    //- Meta tags
     title= meta.title || i18n( 'generic:name' )
     meta( property= "og:type", content= "website" )
     meta( property= "og:site_name", content= i18n( 'generic:name' ) )
@@ -31,7 +31,7 @@ html( lang= cookies.locale, theme= cookies.theme, units= cookies.units )
     if meta.robots
       meta( name= "robots", content= meta.robots )
 
-  // Content
+  //- Site content
   body#top( class= bodyClasses )
     include ../components/header.pug
     main#main.pt-main( role= "main", aria-label= "Content" )
