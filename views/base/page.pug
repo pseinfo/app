@@ -7,6 +7,16 @@ html( lang= cookies.locale, theme= cookies.theme, units= cookies.units )
     link( rel= "icon", href= "assets/favicon.ico", sizes= "48x48", type= "image/x-icon" )
     link( rel= "icon", href= "assets/atom.svg", sizes= "any", type= "image/svg+xml" )
 
+    title= meta.title || i18n( 'generic:title' )
+    if meta.description
+      meta( name= "description", content= meta.description )
+    if meta.keywords.length
+      meta( name= "keywords", content= meta.keywords.join( ', ' ) )
+    if meta.canonical
+      link( rel= "canonical", href= meta.canonical )
+    if meta.robots
+      meta( name= "robots", content= meta.robots )
+
   body#top( class= bodyClasses )
     include ../components/header.pug
 
