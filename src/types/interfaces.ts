@@ -55,12 +55,12 @@ export interface ILogger {
 export interface IRouter {
     router: ExpressRouter;
     controllers: Map< string, IController >;
+    getController ( route: string ) : IController | undefined;
     registerController ( controller: IController ) : void;
     registerControllers ( controllers: IController[] ) : void;
     useMiddleware ( handler: RequestHandler ) : void;
     useErrorHandler ( handler: ErrorHandler ) : void;
     setupErrorHandling () : void;
-    getController ( route: string ) : IController | undefined;
     removeController ( route: string ) : boolean;
     clearControllers () : void;
 }

@@ -1,6 +1,6 @@
 import { ErrorHandler, RequestHandler } from '@pseinfo/app/types/index';
 import { IController, IRouter } from '@pseinfo/app/types/interfaces';
-import { Router as ExpressRouter } from 'express';
+import { NextFunction, Request, Response, Router as ExpressRouter } from 'express';
 import { serviceFactory } from './ServiceFactory';
 
 export class Router implements IRouter {
@@ -17,9 +17,49 @@ export class Router implements IRouter {
     public get router () : ExpressRouter { return this._router }
     public get controllers () : Map< string, IController > { return this._controllers }
 
-    public registerController ( controller: IController ) : void {}
+    public getController ( route: string ) : IController | undefined {
+        return this._controllers.get( route );
+    }
 
-    public registerControllers ( controllers: IController[] ) : void {}
+    public registerController ( controller: IController ) : void {
+
+        const route = controller.route;
+        const template = controller.template;
+        const methods = controller.methods;
+        let success = false;
+
+        if ( this._controllers.has( route ) ) {
+            serviceFactory.logger.warn( `Controller for route '${route}' already registered, overwriting` );
+        }
+
+        methods.forEach( method => {
+
+            if ( ! [ 'get', 'post' ].includes( method.toLowerCase() ) ) {
+                serviceFactory.logger.warn( `Unsupported method '${method}' for route '${route}'` );
+                return;
+            }
+
+            this._router[ method ]( route, controller.handle.bind( controller ) );
+            success = true;
+
+        } );
+
+        if ( success ) {
+
+            this._controllers.set( route, controller );
+            serviceFactory.logger.info( `Controller registered: ${route} -> ${template}` );
+
+        } else {
+
+            serviceFactory.logger.error( `Failed to register controller for route '${route}'` );
+
+        }
+
+    }
+
+    public registerControllers ( controllers: IController[] ) : void {
+        controllers.forEach( controller => this.registerController( controller ) );
+    }
 
     public useMiddleware ( handler: RequestHandler ) : void {
 
@@ -36,10 +76,6 @@ export class Router implements IRouter {
     }
 
     public setupErrorHandling () : void {}
-
-    public getController ( route: string ) : IController | undefined {
-        return this._controllers.get( route );
-    }
 
     public removeController ( route: string ) : boolean {
 
