@@ -119,15 +119,3 @@ export interface HealthStatus {
     pid: number;
     version: string;
 }
-
-// Error response structure
-export interface ErrorResponse {
-    error: {
-        message: string;
-        status: number;
-        path: string;
-        method: string;
-        stack?: string;
-        details?: Record< string, any >;
-    };
-}

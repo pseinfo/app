@@ -17,8 +17,7 @@
       "@pseinfo/app/controller/*": [ "src/controller/*" ],
       "@pseinfo/app/middleware/*": [ "src/middleware/*" ],
       "@pseinfo/app/services/*": [ "src/services/*" ],
-      "@pseinfo/app/types/*": [ "src/types/*" ],
-      "@pseinfo/app/utils/*": [ "src/utils/*" ]
+      "@pseinfo/app/types/*": [ "src/types/*" ]
     }
   },
   "tsc-alias": {
