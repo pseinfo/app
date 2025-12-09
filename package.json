@@ -39,7 +39,7 @@
     "express-rate-limit": "^8.1.0",
     "i18next": "^25.7.2",
     "i18next-fs-backend": "^2.6.0",
-    "i18next-http-middleware": "^3.8.1",
+    "i18next-http-middleware": "^3.9.0",
     "js-yaml": "^4.1.0",
     "pug": "^3.0.3"
   },
