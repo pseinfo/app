@@ -35,7 +35,7 @@
     "compression": "^1.8.1",
     "cookie-parser": "^1.4.7",
     "deepmerge": "^4.3.1",
-    "express": "^5.1.0",
+    "express": "^5.2.1",
     "express-rate-limit": "^8.1.0",
     "i18next": "^25.7.2",
     "i18next-fs-backend": "^2.6.0",
@@ -46,7 +46,7 @@
   "devDependencies": {
     "@types/compression": "^1.8.1",
     "@types/cookie-parser": "^1.4.9",
-    "@types/express": "^5.0.3",
+    "@types/express": "^5.0.6",
     "@types/js-yaml": "^4.0.9",
     "cross-env": "^10.1.0",
     "sass": "^1.95.0",
