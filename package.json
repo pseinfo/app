@@ -40,7 +40,7 @@
     "i18next": "^25.7.2",
     "i18next-fs-backend": "^2.6.1",
     "i18next-http-middleware": "^3.9.0",
-    "js-yaml": "^4.1.0",
+    "js-yaml": "^4.1.1",
     "pug": "^3.0.3"
   },
   "devDependencies": {
