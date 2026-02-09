@@ -38,6 +38,7 @@ export class I18nMiddleware implements IMiddleware {
                     keySeparator: false,
                     saveMissing: debug,
                     debug: debug,
+                    showSupportNotice: false,
                     backend: {
                         loadPath: join( cwd, pattern ),
                         addPath: join( cwd, missing )
