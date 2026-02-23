@@ -37,7 +37,7 @@
     "deepmerge": "^4.3.1",
     "express": "^5.2.1",
     "express-rate-limit": "^8.2.1",
-    "i18next": "^25.8.8",
+    "i18next": "^25.8.13",
     "i18next-fs-backend": "^2.6.1",
     "i18next-http-middleware": "^3.9.2",
     "js-yaml": "^4.1.1",
