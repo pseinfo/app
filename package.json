@@ -51,7 +51,7 @@
     "cross-env": "^10.1.0",
     "sass": "^1.98.0",
     "tsc-alias": "^1.8.16",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.2",
     "uglifyjs-folder": "^3.3.0"
   }
 }
