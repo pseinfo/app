@@ -10,14 +10,13 @@
     "declaration": false,
     "declarationMap": false,
     "sourceMap": true,
-    "baseUrl": ".",
     "rootDir": "./src",
     "outDir": "./dist",
     "paths": {
-      "@pseinfo/app/controller/*": [ "src/controller/*" ],
-      "@pseinfo/app/middleware/*": [ "src/middleware/*" ],
-      "@pseinfo/app/services/*": [ "src/services/*" ],
-      "@pseinfo/app/types/*": [ "src/types/*" ]
+      "@pseinfo/app/controller/*": [ "./src/controller/*" ],
+      "@pseinfo/app/middleware/*": [ "./src/middleware/*" ],
+      "@pseinfo/app/services/*": [ "./src/services/*" ],
+      "@pseinfo/app/types/*": [ "./src/types/*" ]
     }
   },
   "tsc-alias": {
