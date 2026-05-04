@@ -50,7 +50,7 @@
     "@types/js-yaml": "^4.0.9",
     "cross-env": "^10.1.0",
     "sass": "^1.99.0",
-    "tsc-alias": "^1.8.16",
+    "tsc-alias": "^1.8.17",
     "typescript": "^6.0.3",
     "uglifyjs-folder": "^3.3.0"
   }
