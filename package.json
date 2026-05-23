@@ -1,0 +1,12 @@
+{
+  "name": "@pseinfo/app",
+  "private": true,
+  "description": "Open source web app periodic table, adless and free forever",
+  "license": "MIT",
+  "version": "3.0.0",
+  "author": {
+    "name": "komed3 (Paul Köhler)",
+    "email": "webmaster@komed3.de",
+    "url": "https://komed3.de"
+  }
+}
