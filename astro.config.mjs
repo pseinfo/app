@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 
-const getAliasUrl = ( path ) => new URL( path, import.meta.url ).pathname;
+import { getAliasUrl } from './lib/build-utils.mjs';
+
 
 export default defineConfig( {
   integrations: [
