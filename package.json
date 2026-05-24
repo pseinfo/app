@@ -11,6 +11,23 @@
   },
   "type": "module",
   "scripts": {},
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "astro": "^6.3.7",
+    "i18next": "^26.2.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-i18next": "^17.0.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.5.0",
+    "cross-env": "^10.1.0",
+    "postcss": "^8.5.15",
+    "shx": "^0.4.0",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^6.0.3"
+  }
 }
