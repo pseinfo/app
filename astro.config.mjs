@@ -8,15 +8,24 @@ import { getAliasUrl } from './lib/build-utils.mjs';
 export default defineConfig( {
   integrations: [
     react(),
-    sitemap()
+    sitemap( {
+      filenameBase: 'sitemap',
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en-US',
+          de: 'de-DE',
+          fr: 'fr-FR'
+        }
+      }
+    } )
   ],
 
   site: 'https://pse-info.de',
-  base: './',
-  publicDir: './public',
+  publicDir: 'public',
   output: 'static',
   compressHTML: true,
-  outDir: '/dist',
+  outDir: 'dist',
 
   vite: {
     resolve: {
@@ -35,7 +44,7 @@ export default defineConfig( {
 
   build: {
     format: 'directory',
-    client: './client',
+    client: 'client',
     inlineStylesheets: 'never'
   },
 
@@ -43,7 +52,7 @@ export default defineConfig( {
     defaultLocale: 'en',
     locales: [ 'en', 'de', 'fr' ],
     routing: {
-      prefixDefaultLocale: true
+      prefixDefaultLocale: false
     }
   }
 } );
