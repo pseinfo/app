@@ -14,8 +14,7 @@
     "clean": "shx rm -rf dist",
     "dev": "cross-env NODE_ENV=dev astro dev",
     "build": "npm run clean && astro build",
-    "preview": "astro preview",
-    "check": "astro check"
+    "preview": "astro preview"
   },
   "dependencies": {
     "astro": "^6.3.7",
