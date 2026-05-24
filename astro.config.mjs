@@ -1,12 +1,14 @@
-import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
+import { defineConfig } from 'astro/config';
 
 import { getAliasUrl } from './lib/build-utils.mjs';
 
 
 export default defineConfig( {
   integrations: [
-    react()
+    react(),
+    sitemap()
   ],
 
   site: 'https://pse-info.de',
