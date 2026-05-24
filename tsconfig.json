@@ -5,6 +5,7 @@
     "paths": {
       "@/*": [ "./src/*" ],
       "@/asset/*": [ "./src/assets/*" ],
+      "@/base/*": [ "./src/components/base/*" ],
       "@/ctx/*": [ "./src/context/*" ],
       "@/hook/*": [ "./src/hooks/*" ],
       "@/layout/*": [ "./src/components/layout/*" ],

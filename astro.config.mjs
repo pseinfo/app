@@ -26,6 +26,7 @@ export default defineConfig( {
       alias: {
         '@': getAliasUrl( './src' ),
         '@/asset': getAliasUrl( './src/assets' ),
+        '@/base': getAliasUrl( './src/components/base' ),
         '@/ctx': getAliasUrl( './src/context' ),
         '@/hook': getAliasUrl( './src/hooks' ),
         '@/layout': getAliasUrl( './src/components/layout' ),
