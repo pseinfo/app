@@ -1,5 +1,5 @@
 {
-  "name": "pseinfo-app",
+  "name": "@pseinfo/app",
   "private": true,
   "description": "Open source periodic table, adless and free forever",
   "license": "MIT",
@@ -9,49 +9,34 @@
     "email": "webmaster@komed3.de",
     "url": "https://komed3.de"
   },
-  "homepage": "https://github.com/pseinfo",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pseinfo/app.git"
-  },
-  "bugs": {
-    "url": "https://github.com/pseinfo/app/issues"
-  },
-  "keywords": [
-    "periodic-table",
-    "nuclides",
-    "open-source"
-  ],
+  "type": "module",
   "scripts": {
-    "assets:clear": "rm -rf public/css && rm -rf public/js",
-    "assets:css": "npx sass ui/css:public/css --style=compressed --no-source-map",
-    "assets:js": "uglifyjs-folder ui/src/ -o public/js/ --each",
-    "assets": "npm run assets:clear && npm run assets:css && npm run assets:js",
-    "build": "npm run tsc && npm run assets",
-    "start": "cross-env NODE_ENV=development node index.js",
-    "tsc": "tsc && tsc-alias"
+    "clean": "shx rm -rf dist",
+    "dev": "cross-env NODE_ENV=dev astro dev",
+    "build": "npm run clean && astro build",
+    "preview": "astro preview"
   },
   "dependencies": {
-    "compression": "^1.8.1",
-    "cookie-parser": "^1.4.7",
-    "deepmerge": "^4.3.1",
-    "express": "^5.2.1",
-    "express-rate-limit": "^8.5.2",
+    "@pseinfo/i18n": "github:pseinfo/i18n",
+    "astro": "^6.3.7",
     "i18next": "^26.2.0",
-    "i18next-fs-backend": "^2.6.5",
-    "i18next-http-middleware": "^3.9.6",
-    "js-yaml": "^4.1.1",
-    "pug": "^3.0.4"
+    "lucide-react": "^1.16.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-i18next": "^17.0.8"
   },
   "devDependencies": {
-    "@types/compression": "^1.8.1",
-    "@types/cookie-parser": "^1.4.10",
-    "@types/express": "^5.0.6",
-    "@types/js-yaml": "^4.0.9",
+    "@astrojs/react": "^5.0.5",
+    "@astrojs/sitemap": "^3.7.2",
+    "@tailwindcss/postcss": "^4.3.0",
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.5.0",
     "cross-env": "^10.1.0",
-    "sass": "^1.99.0",
-    "tsc-alias": "^1.8.17",
-    "typescript": "^6.0.3",
-    "uglifyjs-folder": "^3.3.0"
+    "postcss": "^8.5.15",
+    "shx": "^0.4.0",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^6.0.3"
   }
 }

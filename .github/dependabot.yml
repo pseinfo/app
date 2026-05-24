@@ -1,6 +1,59 @@
 version: 2
+
 updates:
   - package-ecosystem: "npm"
     directory: "/"
+
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "03:00"
+
+    open-pull-requests-limit: 10
+    versioning-strategy: increase
+
+    groups:
+      pseinfo:
+        patterns:
+          - "@pseinfo/*"
+      i18n:
+        patterns:
+          - "i18next"
+          - "react-i18next"
+          - "i18next-*"
+      react:
+        patterns:
+          - "react"
+          - "react-*"
+          - "@types/react*"
+      ui:
+        patterns:
+          - "katex"
+          - "lucide-*"
+          - "recharts"
+      typescript:
+        patterns:
+          - "typescript"
+          - "@types/*"
+      build:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+          - "astro-*"
+      tailwind:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+          - "postcss"
+          - "autoprefixer"
+      tooling:
+        patterns:
+          - "cross-env"
+          - "shx"
+
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+    labels:
+      - "dependencies"

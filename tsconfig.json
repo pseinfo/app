@@ -1,27 +1,18 @@
 {
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "declaration": false,
-    "declarationMap": false,
-    "sourceMap": true,
-    "rootDir": "./src",
-    "outDir": "./dist",
+    "allowImportingTsExtensions": true,
     "paths": {
-      "@pseinfo/app/controller/*": [ "./src/controller/*" ],
-      "@pseinfo/app/middleware/*": [ "./src/middleware/*" ],
-      "@pseinfo/app/services/*": [ "./src/services/*" ],
-      "@pseinfo/app/types/*": [ "./src/types/*" ]
+      "@/*": [ "./src/*" ],
+      "@/asset/*": [ "./src/assets/*" ],
+      "@/base/*": [ "./src/components/base/*" ],
+      "@/ctx/*": [ "./src/context/*" ],
+      "@/hook/*": [ "./src/hooks/*" ],
+      "@/layout/*": [ "./src/components/layout/*" ],
+      "@/lib/*": [ "./src/lib/*" ],
+      "@/page/*": [ "./src/pages/*" ],
+      "@/type/*": [ "./src/types/*" ],
+      "@/ui/*": [ "./src/components/ui/*" ]
     }
-  },
-  "tsc-alias": {
-    "resolveFullPaths": true
-  },
-  "include": [ "src" ],
-  "exclude": [ "node_modules" ]
+  }
 }
