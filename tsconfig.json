@@ -3,6 +3,7 @@
   "compilerOptions": {
     "paths": {
       "@/*": [ "./src/*" ],
+      "@/asset/*": [ "./src/assets/*" ],
       "@/ctx/*": [ "./src/context/*" ],
       "@/hook/*": [ "./src/hooks/*" ],
       "@/layout/*": [ "./src/components/layout/*" ],

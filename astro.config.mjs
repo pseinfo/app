@@ -31,6 +31,7 @@ export default defineConfig( {
     resolve: {
       alias: {
         '@': getAliasUrl( './src' ),
+        '@/asset': getAliasUrl( './src/assets' ),
         '@/ctx': getAliasUrl( './src/context' ),
         '@/hook': getAliasUrl( './src/hooks' ),
         '@/layout': getAliasUrl( './src/components/layout' ),
@@ -44,8 +45,9 @@ export default defineConfig( {
 
   build: {
     format: 'directory',
-    client: 'client',
-    inlineStylesheets: 'never'
+    inlineStylesheets: 'never',
+    assets: 'assets',
+    client: 'client'
   },
 
   i18n: {
