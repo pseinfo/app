@@ -48,4 +48,15 @@
       text-slate-900
       bg-slate-200;
   }
+
+  button {
+    @apply
+      bg-transparent
+      rounded-sm
+      transition-all
+      duration-200
+      delay-75
+      ease-out
+      cursor-pointer;
+  }
 }
