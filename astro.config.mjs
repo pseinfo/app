@@ -8,13 +8,31 @@ export default defineConfig( {
     react()
   ],
 
+  site: 'https://pse-info.de',
+  base: './dist',
+  publicDir: './public',
   output: 'static',
+  compressHTML: true,
 
   vite: {
     resolve: {
       alias: {
         '@': getAliasUrl( './src' )
       }
+    }
+  },
+
+  build: {
+    format: 'directory',
+    client: './client',
+    inlineStylesheets: 'never'
+  },
+
+  i18n: {
+    defaultLocale: 'en',
+    locales: [ 'en', 'de', 'fr' ],
+    routing: {
+      prefixDefaultLocale: true
     }
   }
 } );
