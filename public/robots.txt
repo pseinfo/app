@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: 
+
+Disallow: /_astro/
+Disallow: /assets/
+
+Sitemap: https://pse-info.de/sitemap-index.xml
