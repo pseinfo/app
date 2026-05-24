@@ -47,6 +47,7 @@ export const Header = () : JSX.Element => {
         >
           <img
             src= { Atom }
+            alt= 'Logo'
             role= 'img'
             aria-label= 'Logo'
             className= 'w-10 h-10'
