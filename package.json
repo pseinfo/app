@@ -10,7 +10,13 @@
     "url": "https://komed3.de"
   },
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "clean": "shx rm -rf dist",
+    "dev": "cross-env NODE_ENV=dev astro dev",
+    "build": "npm run clean && astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
   "dependencies": {
     "astro": "^6.3.7",
     "i18next": "^26.2.0",

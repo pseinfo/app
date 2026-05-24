@@ -10,10 +10,11 @@ export default defineConfig( {
   ],
 
   site: 'https://pse-info.de',
-  base: './dist',
+  base: './',
   publicDir: './public',
   output: 'static',
   compressHTML: true,
+  outDir: '/dist',
 
   vite: {
     resolve: {
