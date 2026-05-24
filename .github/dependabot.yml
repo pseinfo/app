@@ -1,0 +1,54 @@
+version: 2
+
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+
+    open-pull-requests-limit: 10
+    versioning-strategy: increase
+
+    groups:
+      pseinfo:
+        patterns:
+          - "@pseinfo/*"
+      react:
+        patterns:
+          - "react"
+          - "react-*"
+          - "@types/react*"
+      ui:
+        patterns:
+          - "lucide-*"
+          - "recharts"
+      typescript:
+        patterns:
+          - "typescript"
+          - "@types/*"
+      vite:
+        patterns:
+          - "vite"
+          - "@vitejs/*"
+          - "vite-plugin-*"
+      tailwind:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+          - "postcss"
+          - "autoprefixer"
+      tooling:
+        patterns:
+          - "cross-env"
+          - "shx"
+          - "terser"
+
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+    labels:
+      - "dependencies"
