@@ -29,11 +29,11 @@ updates:
         patterns:
           - "typescript"
           - "@types/*"
-      vite:
+      build:
         patterns:
-          - "vite"
-          - "@vitejs/*"
-          - "vite-plugin-*"
+          - "astro"
+          - "@astrojs/*"
+          - "astro-*"
       tailwind:
         patterns:
           - "tailwindcss"
@@ -44,7 +44,6 @@ updates:
         patterns:
           - "cross-env"
           - "shx"
-          - "terser"
 
     commit-message:
       prefix: "deps"
