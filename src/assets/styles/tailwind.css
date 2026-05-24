@@ -1,4 +1,4 @@
-@import 'tailwind';
+@import 'tailwindcss';
 @import './font.css';
 
 
@@ -6,10 +6,31 @@
   --font-sans: 'Geist', sans-serif;
   --font-display: 'Geist', sans-serif;
   --font-mono: monospace;
+
+  --color-primary: #2a80ad;
 }
 
 @layer base {
   * {
     @apply antialiased font-sans;
+
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-1.5 h-1.5;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-[9999px];
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-500;
   }
 }
