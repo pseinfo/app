@@ -12,25 +12,40 @@
 
 @layer base {
   * {
-    @apply antialiased font-sans;
+    @apply
+      antialiased
+      font-sans;
 
     scrollbar-width: thin;
-    scrollbar-color: #cbd5e1 transparent;
+    scrollbar-color: #90a1b9 transparent;
   }
 
   ::-webkit-scrollbar {
-    @apply w-1.5 h-1.5;
+    @apply
+      w-1.5
+      h-1.5;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-transparent;
+    @apply
+      bg-transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-300 rounded-[9999px];
+    @apply
+      bg-slate-400
+      rounded-[9999px];
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-500;
+    @apply
+      bg-slate-400;
+  }
+
+  body {
+    @apply
+      font-sans
+      text-slate-900
+      bg-slate-200;
   }
 }
