@@ -16,6 +16,11 @@ updates:
       pseinfo:
         patterns:
           - "@pseinfo/*"
+      i18n:
+        patterns:
+          - "i18next"
+          - "react-i18next"
+          - "i18next-*"
       react:
         patterns:
           - "react"
@@ -23,6 +28,7 @@ updates:
           - "@types/react*"
       ui:
         patterns:
+          - "katex"
           - "lucide-*"
           - "recharts"
       typescript:
