@@ -21,8 +21,11 @@
     "useDefineForClassFields": false,
     "isolatedModules": true,
     "paths": {
-      "@/*": [ "./src/*" ],
-      "@/views/*": [ "./src/views/*" ]
+      "@/layout/*": [ "./src/components/layout/*" ],
+      "@/types/*": [ "./src/types/*" ],
+      "@/ui/*": [ "./src/components/ui/*" ],
+      "@/views/*": [ "./src/views/*" ],
+      "@/*": [ "./src/*" ]
     }
   },
   "include": [

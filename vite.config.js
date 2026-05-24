@@ -16,8 +16,11 @@ export default defineConfig ( {
   ],
   resolve: {
     alias: {
-      '@': resolve( __dirname, 'src' ),
-      '@/views': resolve( __dirname, 'src/views' )
+      '@/layout': resolve( __dirname, 'src/components/layout' ),
+      '@/types': resolve( __dirname, 'src/types' ),
+      '@/ui': resolve( __dirname, 'src/components/ui' ),
+      '@/views': resolve( __dirname, 'src/views' ),
+      '@': resolve( __dirname, 'src' )
     }
   },
   css: {
