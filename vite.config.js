@@ -3,11 +3,16 @@ import { resolve } from 'node:path';
 import legacy from '@vitejs/plugin-legacy';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import viteCompression from 'vite-plugin-compression'
 
 export default defineConfig ( {
   plugins: [
     legacy(),
-    react()
+    react(),
+    viteCompression( {
+      algorithm: 'gzip',
+      threshold: 1024
+    } )
   ],
   resolve: {
     alias: {
