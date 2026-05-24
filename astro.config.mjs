@@ -21,7 +21,14 @@ export default defineConfig( {
   vite: {
     resolve: {
       alias: {
-        '@': getAliasUrl( './src' )
+        '@': getAliasUrl( './src' ),
+        '@/ctx': getAliasUrl( './src/context' ),
+        '@/hook': getAliasUrl( './src/hooks' ),
+        '@/layout': getAliasUrl( './src/components/layout' ),
+        '@/lib': getAliasUrl( './src/lib' ),
+        '@/page': getAliasUrl( './src/pages' ),
+        '@/type': getAliasUrl( './src/types' ),
+        '@/ui': getAliasUrl( './src/components/ui' )
       }
     }
   },

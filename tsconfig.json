@@ -2,7 +2,14 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "paths": {
-      "@/*": [ "./src/*" ]
+      "@/*": [ "./src/*" ],
+      "@/ctx/*": [ "./src/context/*" ],
+      "@/hook/*": [ "./src/hooks/*" ],
+      "@/layout/*": [ "./src/components/layout/*" ],
+      "@/lib/*": [ "./src/lib/*" ],
+      "@/page/*": [ "./src/pages/*" ],
+      "@/type/*": [ "./src/types/*" ],
+      "@/ui/*": [ "./src/components/ui/*" ]
     }
   }
 }
