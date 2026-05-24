@@ -1,5 +1,6 @@
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
+import i18nInit from '@pseinfo/i18n/config/app';
 import { defineConfig } from 'astro/config';
 
 import { getAliasUrl } from './lib/build-utils.mjs';
@@ -10,14 +11,7 @@ export default defineConfig( {
     react(),
     sitemap( {
       filenameBase: 'sitemap',
-      i18n: {
-        defaultLocale: 'en',
-        locales: {
-          en: 'en-US',
-          de: 'de-DE',
-          fr: 'fr-FR'
-        }
-      }
+      i18n: i18nInit.sitemap
     } )
   ],
 
@@ -50,11 +44,5 @@ export default defineConfig( {
     client: 'client'
   },
 
-  i18n: {
-    defaultLocale: 'en',
-    locales: [ 'en', 'de', 'fr' ],
-    routing: {
-      prefixDefaultLocale: false
-    }
-  }
+  i18n: i18nInit.routing
 } );
