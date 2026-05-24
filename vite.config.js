@@ -1,3 +1,5 @@
+import { resolve } from 'node:path';
+
 import legacy from '@vitejs/plugin-legacy';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
@@ -7,6 +9,11 @@ export default defineConfig ( {
     legacy(),
     react()
   ],
+  resolve: {
+    alias: {
+      '@': resolve( __dirname, 'src' )
+    }
+  },
   css: {
     transformer: 'postcss',
     postcss: './postcss.config.js'

@@ -20,7 +20,9 @@
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
     "isolatedModules": true,
-    "paths": {}
+    "paths": {
+      "@/*": [ "./src/*" ]
+    }
   },
   "include": [
     "src/**/*.ts",
