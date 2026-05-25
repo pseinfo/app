@@ -36,15 +36,16 @@ export default defineConfig( {
       alias: {
         '@': getAliasUrl( './src' ),
         '@/asset': getAliasUrl( './src/assets' ),
+        '@/c/base': getAliasUrl( './src/components/base' ),
+        '@/c/ui': getAliasUrl( './src/components/ui' ),
         '@/ctx': getAliasUrl( './src/context' ),
         '@/hook': getAliasUrl( './src/hooks' ),
-        '@/layout': getAliasUrl( './src/components/layout' ),
+        '@/layout': getAliasUrl( './src/layouts' ),
         '@/lib': getAliasUrl( './src/lib' ),
         '@/page': getAliasUrl( './src/pages' ),
         '@/provider': getAliasUrl( './src/providers' ),
         '@/service': getAliasUrl( './src/services' ),
-        '@/type': getAliasUrl( './src/types' ),
-        '@/ui': getAliasUrl( './src/components/ui' )
+        '@/type': getAliasUrl( './src/types' )
       }
     },
 

@@ -5,15 +5,16 @@
     "paths": {
       "@/*": [ "./src/*" ],
       "@/asset/*": [ "./src/assets/*" ],
+      "@/c/base/*": [ "./src/components/base/*" ],
+      "@/c/ui/*": [ "./src/components/ui/*" ],
       "@/ctx/*": [ "./src/context/*" ],
       "@/hook/*": [ "./src/hooks/*" ],
-      "@/layout/*": [ "./src/components/layout/*" ],
+      "@/layout/*": [ "./src/layouts/*" ],
       "@/lib/*": [ "./src/lib/*" ],
       "@/page/*": [ "./src/pages/*" ],
       "@/provider/*": [ "./src/providers/*" ],
       "@/service/*": [ "./src/services/*" ],
-      "@/type/*": [ "./src/types/*" ],
-      "@/ui/*": [ "./src/components/ui/*" ]
+      "@/type/*": [ "./src/types/*" ]
     }
   }
 }
