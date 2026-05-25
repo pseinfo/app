@@ -2,7 +2,6 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import i18nInit from '@pseinfo/i18n/config/app';
 import { defineConfig } from 'astro/config';
-
 import { getAliasUrl } from './lib/build-utils.mjs';
 
 
@@ -32,6 +31,7 @@ export default defineConfig( {
         '@/layout': getAliasUrl( './src/components/layout' ),
         '@/lib': getAliasUrl( './src/lib' ),
         '@/page': getAliasUrl( './src/pages' ),
+        '@/provider': getAliasUrl( './src/providers' ),
         '@/service': getAliasUrl( './src/services' ),
         '@/type': getAliasUrl( './src/types' ),
         '@/ui': getAliasUrl( './src/components/ui' )

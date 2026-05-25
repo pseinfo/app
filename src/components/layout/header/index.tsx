@@ -1,9 +1,8 @@
+import { HeaderLogo } from '@/layout/header/logo';
 import type { JSX } from 'react';
 
-import { HeaderLogo } from '@/layout/header/logo';
 
-
-export const Header = (): JSX.Element => {
+export const Header = () : JSX.Element => {
   return (
     <>
       <header

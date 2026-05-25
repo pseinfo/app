@@ -1,0 +1,13 @@
+---
+import BaseLayout from '@/base/base.astro';
+
+export function getStaticPaths () {
+  return [
+    { params: { locale: 'en' } },
+    { params: { locale: 'de' } }
+  ];
+}
+---
+
+
+<BaseLayout />

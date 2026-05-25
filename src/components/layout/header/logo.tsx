@@ -1,10 +1,12 @@
 import type { JSX } from 'react';
-
-import AtomSvg from '/assets/media/atom.svg?url';
+import { useTranslation } from 'react-i18next';
 import AtomPng from '/assets/media/atom.png?url';
+import AtomSvg from '/assets/media/atom.svg?url';
 
 
 export const HeaderLogo = () : JSX.Element => {
+  const { t } = useTranslation( 'app.generic' );
+
   return (
     <a
       href= '/'
@@ -27,7 +29,7 @@ export const HeaderLogo = () : JSX.Element => {
       <div
         className= 'min-w-0 truncate font-semibold'
       >
-        Periodic Table
+        { t( $ => $.title ) }
       </div>
     </a>
   );
