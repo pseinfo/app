@@ -1,8 +1,12 @@
 import { AppContext } from '@/context/AppContext';
 import i18n from '@/service/I18nService';
-import type { AppProviderProps } from '@/type/providers/AppProvider';
-import type { JSX } from 'react';
+import type { JSX, PropsWithChildren } from 'react';
 import { useCallback, useEffect, useMemo } from 'react';
+
+
+export interface AppProviderProps extends PropsWithChildren {
+  locale?: string;
+}
 
 
 export const AppProvider = ( { children, locale }: AppProviderProps ) : JSX.Element => {
