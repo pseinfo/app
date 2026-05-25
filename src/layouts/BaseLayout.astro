@@ -1,0 +1,53 @@
+---
+import '@/asset/styles/tailwind.css';
+import Favicon from '/assets/favicon.ico?url';
+import AtomSvg from '/assets/media/atom.svg?url';
+
+
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+---
+
+
+<!doctype html>
+
+<html lang= { locale }>
+  <head>
+    <meta
+      charset='UTF-8'
+    />
+
+    <meta
+      name= 'viewport'
+      content= 'width=device-width, initial-scale=1.0'
+    />
+
+    <meta
+      name= 'theme-color'
+      content= '#2a80ad'
+    />
+
+    <link
+      rel= 'icon'
+      type= 'image/svg+xml'
+      href= { AtomSvg }
+      sizes= 'any'
+    />
+
+    <link
+      rel= 'icon'
+      type= 'image/x-icon'
+      href= { Favicon }
+      sizes= '48x48'
+    />
+  </head>
+
+  <body
+    id= 'top'
+  >
+    <slot />
+  </body>
+</html>
