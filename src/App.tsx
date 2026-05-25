@@ -1,4 +1,4 @@
-import { Container } from '@/layout/container';
+import { Container } from '@/c/base/container';
 import { AppProvider } from '@/provider/AppProvider';
 import type { JSX, PropsWithChildren } from 'react';
 
