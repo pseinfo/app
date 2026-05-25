@@ -1,0 +1,19 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "@/*": [ "./src/*" ],
+      "@/asset/*": [ "./src/assets/*" ],
+      "@/ctx/*": [ "./src/context/*" ],
+      "@/hook/*": [ "./src/hooks/*" ],
+      "@/layout/*": [ "./src/components/layout/*" ],
+      "@/lib/*": [ "./src/lib/*" ],
+      "@/page/*": [ "./src/pages/*" ],
+      "@/provider/*": [ "./src/providers/*" ],
+      "@/service/*": [ "./src/services/*" ],
+      "@/type/*": [ "./src/types/*" ],
+      "@/ui/*": [ "./src/components/ui/*" ]
+    }
+  }
+}
