@@ -1,7 +1,7 @@
 import type { JSX } from 'react';
 
-import { Header } from '@/layout/Header';
-import { Footer } from '@/layout/Footer';
+import { Header } from '@/layout/header';
+import { Footer } from '@/layout/footer';
 
 
 export const Container = () : JSX.Element => {
