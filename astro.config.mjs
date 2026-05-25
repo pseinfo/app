@@ -1,4 +1,5 @@
 import react from '@astrojs/react';
+import i18nConfig from '@pseinfo/i18n/config/app';
 import { defineConfig } from 'astro/config';
 
 
@@ -9,11 +10,20 @@ export default defineConfig( {
   output: 'static',
   outDir: 'dist',
   publicDir: 'public',
-  compressHTML: true,
+  trailingSlash: 'ignore',
+  compressHTML: 'jsx',
+
+  i18n: i18nConfig.astro,
 
   integrations: [
     react()
   ],
+
+  build: {
+    format: 'directory',
+    inlineStylesheets: 'never',
+    assets: 'assets'
+  },
 
   vite: {
     resolve: {
@@ -51,11 +61,5 @@ export default defineConfig( {
         }
       }
     }
-  },
-
-  build: {
-    format: 'directory',
-    inlineStylesheets: 'never',
-    assets: 'assets'
   }
 } );
