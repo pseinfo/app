@@ -1,6 +1,8 @@
-import { Header } from '@/layout/header';
-import type { ContainerProps } from '@/type/components/layout/container';
-import type { JSX } from 'react';
+import { Header } from '@/c/base/header';
+import type { JSX, PropsWithChildren } from 'react';
+
+
+export interface ContainerProps extends PropsWithChildren {}
 
 
 export const Container = ( { children }: ContainerProps ) : JSX.Element => {
