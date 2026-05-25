@@ -32,6 +32,7 @@ export default defineConfig( {
         '@/layout': getAliasUrl( './src/components/layout' ),
         '@/lib': getAliasUrl( './src/lib' ),
         '@/page': getAliasUrl( './src/pages' ),
+        '@/service': getAliasUrl( './src/services' ),
         '@/type': getAliasUrl( './src/types' ),
         '@/ui': getAliasUrl( './src/components/ui' )
       }
