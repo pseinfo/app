@@ -8,6 +8,7 @@ interface Props {
   locale: string;
 }
 
+
 const { locale } = Astro.props;
 ---
 
@@ -16,9 +17,7 @@ const { locale } = Astro.props;
 
 <html lang= { locale }>
   <head>
-    <meta
-      charset='UTF-8'
-    />
+    <meta charset='UTF-8' />
 
     <meta
       name= 'viewport'
@@ -45,9 +44,7 @@ const { locale } = Astro.props;
     />
   </head>
 
-  <body
-    id= 'top'
-  >
+  <body id= 'top'>
     <slot />
   </body>
 </html>
