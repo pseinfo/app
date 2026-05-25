@@ -1,3 +1,4 @@
+import { HeaderLogo } from '@/c/base/header/HeaderLogo';
 import type { JSX } from 'react';
 
 
@@ -12,13 +13,11 @@ export const Header = () : JSX.Element => {
         'shadow-slate-300/50 select-none'
       }
     >
-      <div
-        className= 'flex justify-between items-center gap-4 h-full px-3 sm:px-4'
-      >
+      <div className= 'flex justify-between items-center gap-4 h-full px-3 sm:px-4'>
         { /** LEFT SIDE */ }
-        <div
-          className= 'flex items-center min-w-0'
-        />
+        <div className= 'flex items-center min-w-0'>
+          <HeaderLogo />
+        </div>
       </div>
     </header>
   );

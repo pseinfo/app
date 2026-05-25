@@ -1,5 +1,7 @@
+import '@/asset/styles/tailwind.css';
 import { Container } from '@/c/base/container';
 import { AppProvider } from '@/provider/AppProvider';
+import '@/service/I18nService';
 import type { JSX, PropsWithChildren } from 'react';
 
 
