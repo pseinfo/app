@@ -1,0 +1,22 @@
+---
+import App from '@/App';
+import BaseLayout from '@/layout/BaseLayout.astro';
+
+
+const locale = Astro.currentLocale ?? 'en';
+
+export function getStaticPaths () {
+  return [
+    { params: { locale: 'en' } },
+    { params: { locale: 'de' } }
+  ];
+}
+---
+
+
+<BaseLayout locale= { locale }>
+  <App
+    locale= { locale }
+    client:load
+  />
+</BaseLayout>

@@ -1,7 +1,7 @@
 import type { JSX } from 'react';
-import { useTranslation } from 'react-i18next';
 import AtomPng from '/assets/media/atom.png?url';
 import AtomSvg from '/assets/media/atom.svg?url';
+import { useTranslation } from '@/hooks/useTranslation';
 
 
 export const HeaderLogo = () : JSX.Element => {

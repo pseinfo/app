@@ -1,6 +1,6 @@
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
-import i18nConfig from '@pseinfo/i18n/config/app';
+import { astroConfig, integrationsConfig } from '@pseinfo/i18n/config/app';
 import { defineConfig } from 'astro/config';
 
 
@@ -14,14 +14,18 @@ export default defineConfig( {
   trailingSlash: 'ignore',
   compressHTML: 'jsx',
 
-  i18n: i18nConfig.astro,
+  redirects: {
+    '/': '/en'
+  },
+
+  i18n: astroConfig,
 
   integrations: [
     react(),
     sitemap( {
       filenameBase: 'sitemap',
       entryLimit: 1000,
-      i18n: i18nConfig.integrations.sitemap
+      i18n: integrationsConfig.sitemap
     } )
   ],
 
