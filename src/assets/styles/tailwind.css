@@ -49,6 +49,15 @@
       bg-slate-200;
   }
 
+  a {
+    @apply
+      transition-all
+      duration-200
+      delay-75
+      ease-out
+      cursor-pointer;
+  }
+
   button {
     @apply
       bg-transparent
