@@ -30,6 +30,26 @@ export default defineConfig( {
         '@/type': getAliasUrl( './src/types' ),
         '@/ui': getAliasUrl( './src/components/ui' )
       }
+    },
+
+    build: {
+      assetsDir: 'assets',
+      assetsInlineLimit: 0,
+      cssCodeSplit: true,
+
+      rollupOptions: {
+        output: {
+          entryFileNames: 'assets/js/[hash].js',
+          chunkFileNames: 'assets/js/[hash].js',
+
+          assetFileNames: ( assetInfo ) => {
+            const name = assetInfo.names?.[ 0 ] ?? '';
+
+            if ( name && name.endsWith( '.css' ) ) return 'assets/css/[hash].css';
+            else return 'assets/[hash][extname]';
+          }
+        }
+      }
     }
   },
 
