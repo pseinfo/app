@@ -1,5 +1,4 @@
-import type { AppContextValue } from '@/context/AppContext';
-import { AppContext } from '@/context/AppContext';
+import { AppContext, type AppContextValue } from '@/context/AppContext';
 import { useContext } from 'react';
 
 
