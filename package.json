@@ -21,7 +21,7 @@
     "@pseinfo/i18n": "github:pseinfo/i18n",
     "astro": "^6.4.2",
     "i18next": "^26.2.0",
-    "lucide-react": "^1.16.0",
+    "lucide-react": "^1.17.0",
     "react": "^19.2.6",
     "react-i18next": "^17.0.8"
   },
