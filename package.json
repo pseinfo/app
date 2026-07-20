@@ -23,7 +23,7 @@
     "i18next": "^26.3.6",
     "lucide-react": "^1.24.0",
     "react": "^19.2.6",
-    "react-i18next": "^17.0.9"
+    "react-i18next": "^17.0.10"
   },
   "devDependencies": {
     "@astrojs/react": "^5.0.7",
