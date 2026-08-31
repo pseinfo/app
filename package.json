@@ -19,14 +19,14 @@
   },
   "dependencies": {
     "@pseinfo/i18n": "github:pseinfo/i18n",
-    "astro": "^6.4.8",
+    "astro": "^7.2.9",
     "i18next": "^26.4.0",
     "lucide-react": "^1.33.0",
     "react": "^19.2.6",
     "react-i18next": "^17.0.12"
   },
   "devDependencies": {
-    "@astrojs/react": "^5.0.7",
+    "@astrojs/react": "^6.0.4",
     "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.2.0",
