@@ -31,7 +31,7 @@
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.5.1",
     "@types/react": "^19.2.15",
-    "autoprefixer": "^10.5.6",
+    "autoprefixer": "^10.6.1",
     "cross-env": "^10.1.0",
     "postcss": "^8.5.28",
     "shx": "^0.4.0",
