@@ -33,7 +33,7 @@
     "@types/react": "^19.2.15",
     "autoprefixer": "^10.6.1",
     "cross-env": "^10.1.0",
-    "postcss": "^8.5.29",
+    "postcss": "^8.5.30",
     "shx": "^0.4.0",
     "tailwindcss": "^4.3.0",
     "typescript": "^7.0.2"
